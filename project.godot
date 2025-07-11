@@ -13,6 +13,7 @@ config_version=5
 config/name="SKG Jam"
 run/main_scene="uid://c5p8ihbithyln"
 config/features=PackedStringArray("4.4", "GL Compatibility")
+run/max_fps=60
 config/icon="res://icon.svg"
 
 [global_group]

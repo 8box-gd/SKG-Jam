@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bpkp86jm2uqxp"]
+[gd_scene load_steps=9 format=3 uid="uid://bpkp86jm2uqxp"]
 
 [ext_resource type="Script" uid="uid://gxbrnlxu5o5p" path="res://crackhead.gd" id="1_0lnye"]
 
@@ -12,6 +12,16 @@ material = SubResource("StandardMaterial3D_0lnye")
 
 [sub_resource type="BoxMesh" id="BoxMesh_w651x"]
 material = SubResource("StandardMaterial3D_0lnye")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0lnye"]
+radius = 10.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4ph3p"]
+albedo_color = Color(0, 0.793689, 0.776503, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_s13u0"]
+material = SubResource("StandardMaterial3D_4ph3p")
+radius = 0.4
 
 [node name="Crackhead" type="CharacterBody3D"]
 script = ExtResource("1_0lnye")
@@ -28,12 +38,42 @@ mesh = SubResource("CapsuleMesh_4ph3p")
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.4, -0.6)
 mesh = SubResource("BoxMesh_w651x")
 
-[node name="HearingCast" type="RayCast3D" parent="."]
+[node name="HearingRange" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-target_position = Vector3(0, 0, -6)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HearingRange"]
+shape = SubResource("SphereShape3D_0lnye")
+debug_color = Color(0.985947, 0, 0.328636, 0.42)
+
+[node name="LastPosIndicator" type="MeshInstance3D" parent="."]
+top_level = true
+mesh = SubResource("SphereMesh_s13u0")
+
+[node name="RaycastOrigin" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="HearingCast" type="RayCast3D" parent="RaycastOrigin"]
+unique_name_in_owner = true
+target_position = Vector3(0, 0, -10)
 collision_mask = 3
 
-[node name="ChargeCast" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+[node name="ChargeCast" type="RayCast3D" parent="RaycastOrigin"]
+unique_name_in_owner = true
 target_position = Vector3(0, 0, -2)
 collision_mask = 3
+
+[node name="WallhackCast" type="RayCast3D" parent="RaycastOrigin"]
+unique_name_in_owner = true
+target_position = Vector3(0, 0, -10)
+collision_mask = 2
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+debug_enabled = true
+
+[node name="BonkRecoveryTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="BonkRecoveryTimer" to="." method="_on_bonk_recovery_timer_timeout"]

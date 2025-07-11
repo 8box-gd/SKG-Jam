@@ -38,7 +38,7 @@ mesh = SubResource("BoxMesh_4flbx")
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1.2, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CamPivot"]
-transform = Transform3D(-3.09086e-08, 0.707107, -0.707107, 3.09086e-08, 0.707107, 0.707107, 1, 1.77636e-14, -4.37114e-08, -6, 5, 0)
+transform = Transform3D(-3.09086e-08, 0.707107, -0.707107, 3.09086e-08, 0.707107, 0.707107, 1, 0, -4.37114e-08, -8, 7, 1.74846e-07)
 
 [node name="StepTimer" type="Timer" parent="."]
 wait_time = 0.3

@@ -1,8 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://c5p8ihbithyln"]
+[gd_scene load_steps=10 format=3 uid="uid://c5p8ihbithyln"]
 
 [ext_resource type="Script" uid="uid://v2le1bhw1vji" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://dr4jhgs6v78ji" path="res://player.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://bpkp86jm2uqxp" path="res://crackhead.tscn" id="3_h2yge"]
+[ext_resource type="Material" uid="uid://c03cqcroei4sd" path="res://Textures/Checkerboard.tres" id="4_1bvp3"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_h2yge"]
+vertices = PackedVector3Array(-11, 0.5, -24.75, 21.5, 0.5, -25, 21.5, 0.5, -26, -12.5, 0.5, -26, -12.5, 0.5, 22, -11, 0.5, 22, 8, 0.5, 6, 8.25, 0.5, 7, 20, 0.5, 7, 20, 0.5, -22.75, -8.75, 0.5, -22.75, -8.75, 0.5, 6, 7.75, 0.5, 8.25, 6.25, 0.5, 8.25, 6.5, 0.5, 20, 20, 0.5, 20, -8.75, 0.5, 8.25, -8.75, 0.5, 20)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 0), PackedInt32Array(0, 4, 3), PackedInt32Array(7, 6, 8), PackedInt32Array(8, 6, 9), PackedInt32Array(11, 10, 6), PackedInt32Array(6, 10, 9), PackedInt32Array(14, 13, 12), PackedInt32Array(7, 8, 12), PackedInt32Array(12, 8, 15), PackedInt32Array(12, 15, 14), PackedInt32Array(16, 13, 17), PackedInt32Array(17, 13, 14)]
+agent_height = 2.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0xm2m"]
 size = Vector3(1, 7, 46)
@@ -20,41 +26,48 @@ sky = SubResource("Sky_h2yge")
 script = ExtResource("1_ig7tw")
 
 [node name="Player" parent="." instance=ExtResource("2_0xm2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 19)
 
 [node name="Crackhead" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_h2yge")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
 player = NodePath("../Player")
 
-[node name="CSGBoxFolder" type="Node3D" parent="."]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_h2yge")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="CSGBoxFolder"]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, -0.5, -2)
 use_collision = true
 size = Vector3(35, 1, 49)
+material = ExtResource("4_1bvp3")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="CSGBoxFolder"]
+[node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 3.5, -24)
 use_collision = true
 size = Vector3(30, 8, 1)
+material = ExtResource("4_1bvp3")
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="CSGBoxFolder"]
+[node name="CSGBox3D5" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3.5, 7)
 use_collision = true
 size = Vector3(17, 8, 1)
+material = ExtResource("4_1bvp3")
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="CSGBoxFolder"]
+[node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 3.5, 21)
 use_collision = true
 size = Vector3(30, 8, 1)
+material = ExtResource("4_1bvp3")
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="CSGBoxFolder"]
+[node name="CSGBox3D4" type="CSGBox3D" parent="NavigationRegion3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 3.5, -1.5)
 use_collision = true
 size = Vector3(1, 8, 46)
+material = ExtResource("4_1bvp3")
 
-[node name="InvisWall" type="StaticBody3D" parent="CSGBoxFolder"]
+[node name="InvisWall" type="StaticBody3D" parent="NavigationRegion3D"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CSGBoxFolder/InvisWall"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/InvisWall"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 4, -1.5)
 shape = SubResource("BoxShape3D_0xm2m")
 debug_color = Color(0, 0.595, 0.7, 1)
