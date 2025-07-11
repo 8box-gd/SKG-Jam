@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://bpkp86jm2uqxp"]
+
+[ext_resource type="Script" uid="uid://gxbrnlxu5o5p" path="res://crackhead.gd" id="1_0lnye"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_w651x"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0lnye"]
+albedo_color = Color(1, 0.1, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4ph3p"]
+material = SubResource("StandardMaterial3D_0lnye")
+
+[sub_resource type="BoxMesh" id="BoxMesh_w651x"]
+material = SubResource("StandardMaterial3D_0lnye")
+
+[node name="Crackhead" type="CharacterBody3D"]
+script = ExtResource("1_0lnye")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_w651x")
+
+[node name="DebugCap" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_4ph3p")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DebugCap"]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.4, -0.6)
+mesh = SubResource("BoxMesh_w651x")
+
+[node name="HearingCast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+target_position = Vector3(0, 0, -6)
+collision_mask = 3
+
+[node name="ChargeCast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+target_position = Vector3(0, 0, -2)
+collision_mask = 3
