@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bpkp86jm2uqxp"]
+[gd_scene load_steps=12 format=3 uid="uid://bpkp86jm2uqxp"]
 
 [ext_resource type="Script" uid="uid://gxbrnlxu5o5p" path="res://crackhead.gd" id="1_0lnye"]
 
@@ -23,6 +23,16 @@ albedo_color = Color(0, 0.793689, 0.776503, 1)
 material = SubResource("StandardMaterial3D_4ph3p")
 radius = 0.4
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_0lnye"]
+size = Vector3(0.879238, 0.7, 0.372103)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s13u0"]
+albedo_color = Color(4.71681e-06, 0.994074, 0.000182512, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wj4b2"]
+material = SubResource("StandardMaterial3D_s13u0")
+size = Vector3(0.665, 0.39, 0.215)
+
 [node name="Crackhead" type="CharacterBody3D"]
 script = ExtResource("1_0lnye")
 
@@ -36,6 +46,7 @@ mesh = SubResource("CapsuleMesh_4ph3p")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="DebugCap"]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.4, -0.6)
+visible = false
 mesh = SubResource("BoxMesh_w651x")
 
 [node name="HearingRange" type="Area3D" parent="."]
@@ -76,4 +87,18 @@ debug_enabled = true
 wait_time = 2.0
 one_shot = true
 
+[node name="ChargeCollision" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChargeCollision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.613902)
+shape = SubResource("BoxShape3D_0lnye")
+debug_color = Color(1, 0.0229599, 0.0851782, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ChargeCollision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, -0.7)
+mesh = SubResource("BoxMesh_wj4b2")
+
 [connection signal="timeout" from="BonkRecoveryTimer" to="." method="_on_bonk_recovery_timer_timeout"]
+[connection signal="body_entered" from="ChargeCollision" to="." method="_on_charge_collision_body_entered"]
