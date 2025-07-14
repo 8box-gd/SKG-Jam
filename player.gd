@@ -19,7 +19,7 @@ var _cam_input_direction := Vector2.ZERO
 var _last_movement_direction := Vector3.FORWARD
 var sneaking := false
 var current_speed := 8.0
-var has_control := false
+var has_control := true # Will be set to False when finished. Left True for debug
 var dead := false
 
 func _ready() -> void:
@@ -72,6 +72,8 @@ func _physics_process(delta: float) -> void:
 	if has_control: handle_animations()
 
 func handle_animations() -> void:
-	if sneaking: anim_player.play("SneakWalk/mixamo_com")
+	if sneaking:
+		if velocity.length() > 0: anim_player.play("SneakWalk/mixamo_com")
+		else: anim_player.play("CrouchIdle/mixamo_com")
 	elif velocity.length() > 0: anim_player.play("run-anim/mixamo_com")
 	else: anim_player.play("Idle/mixamo_com")

@@ -12,21 +12,33 @@ enum {WANDERING, TRACKING, WINDUP, CHARGE, BONK, STAB}
 @onready var debug_cap: MeshInstance3D = $DebugCap
 @onready var charge_collision: Area3D = $ChargeCollision
 
+signal get_patrol_points(me: CharacterBody3D)
+
 @export var player: CharacterBody3D
+@export var points_contaner: Node3D
 @export var tracking_speed := 4.0
 @export var tracking_accel := 8.0
 @export var charge_speed := 20.0
 @export var charge_accel := 20.0
 @export var rotation_speed := 10.0
+@export var search_precision := 3.0 #[m]
 
 var move_dir := Vector3.FORWARD
 var state := TRACKING
 var last_known_player_position := Vector3.ZERO
+var patrol_points: Array[Node]
 
 func _ready() -> void:
 	if player:
 		player.footstep.connect(on_player_footstep)
 		update_player_pos()
+	if points_contaner:
+		patrol_points = points_contaner.child_array
+		#print("Patrol points attained: ", patrol_points)
+	else:
+		print("Crackhead: Patrol points not found")
+	#get_patrol_points.emit(self)
+	
 
 func _physics_process(delta: float) -> void:
 	if player:
@@ -53,6 +65,9 @@ func tracking_state(delta: float) -> void:
 	nav_direction = nav_direction.normalized()
 	velocity = velocity.move_toward(nav_direction * tracking_speed, tracking_accel * delta)
 	move_and_slide()
+	
+	if global_position.distance_to(last_known_player_position) < search_precision:
+		find_patrol_point()
 	
 	if charge_cast.is_colliding(): # If you get too close, he auto-charges regardless of sneak
 		if charge_cast.get_collider().is_in_group("Player"):
@@ -93,6 +108,12 @@ func update_player_pos() -> void:
 	last_known_player_position = player.global_position
 	last_pos_indicator.global_position = last_known_player_position
 	nav_agent.target_position = last_known_player_position # Here so it doesnt update every frame
+
+func find_patrol_point() -> void:
+	print("Picking random patrol point")
+	last_known_player_position = patrol_points.pick_random().global_position
+	last_pos_indicator.global_position = last_known_player_position
+	nav_agent.target_position = last_known_player_position
 
 # CHARGE -> BONK transition happens here
 func _on_charge_collision_body_entered(body: Node3D) -> void:

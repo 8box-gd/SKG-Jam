@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://c5p8ihbithyln"]
+[gd_scene load_steps=12 format=3 uid="uid://c5p8ihbithyln"]
 
 [ext_resource type="Script" uid="uid://v2le1bhw1vji" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://dr4jhgs6v78ji" path="res://player.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://bpkp86jm2uqxp" path="res://crackhead.tscn" id="3_h2yge"]
 [ext_resource type="Material" uid="uid://c03cqcroei4sd" path="res://Textures/Checkerboard.tres" id="4_1bvp3"]
+[ext_resource type="Script" uid="uid://dx5uorv68000j" path="res://patrol_container.gd" id="5_7mycd"]
+[ext_resource type="PackedScene" uid="uid://552l02ebnhgv" path="res://patrol_point.tscn" id="5_lquwl"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_h2yge"]
 vertices = PackedVector3Array(-11, 0.5, -24.75, 21.5, 0.5, -25, 21.5, 0.5, -26, -12.5, 0.5, -26, -12.5, 0.5, 22, -11, 0.5, 22, 8, 0.5, 6, 8.25, 0.5, 7, 20, 0.5, 7, 20, 0.5, -22.75, -8.75, 0.5, -22.75, -8.75, 0.5, 6, 7.75, 0.5, 8.25, 6.25, 0.5, 8.25, 6.5, 0.5, 20, 20, 0.5, 20, -8.75, 0.5, 8.25, -8.75, 0.5, 20)
@@ -28,9 +30,22 @@ script = ExtResource("1_ig7tw")
 [node name="Player" parent="." instance=ExtResource("2_0xm2m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 19)
 
-[node name="Crackhead" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_h2yge")]
+[node name="PatrolContainer" type="Node3D" parent="."]
+script = ExtResource("5_7mycd")
+
+[node name="PatrolPoint" parent="PatrolContainer" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="PatrolPoint2" parent="PatrolContainer" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -16)
+
+[node name="PatrolPoint3" parent="PatrolContainer" instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 12)
+
+[node name="Crackhead" parent="." node_paths=PackedStringArray("player", "points_contaner") instance=ExtResource("3_h2yge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -21)
 player = NodePath("../Player")
+points_contaner = NodePath("../PatrolContainer")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_h2yge")
@@ -77,3 +92,5 @@ transform = Transform3D(0.707107, 0.612372, -0.353554, 0, 0.5, 0.866025, 0.70710
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_1bvp3")
+
+[connection signal="get_patrol_points" from="Crackhead" to="." method="_on_crackhead_get_patrol_points"]
