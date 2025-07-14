@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dr4jhgs6v78ji"]
+[gd_scene load_steps=8 format=3 uid="uid://dr4jhgs6v78ji"]
 
 [ext_resource type="Script" uid="uid://ce7u0iwfxk5nx" path="res://player.gd" id="1_4flbx"]
+[ext_resource type="PackedScene" uid="uid://cln33xt0s42ur" path="res://Blender/journalist_model_scene.tscn" id="2_onrkg"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
 
@@ -28,6 +29,7 @@ debug_color = Color(0, 0.6, 0.701961, 0.760784)
 
 [node name="DebugCap" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
 mesh = SubResource("CapsuleMesh_4flbx")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="DebugCap"]
@@ -35,11 +37,44 @@ transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.4, -0.6)
 mesh = SubResource("BoxMesh_4flbx")
 
 [node name="CamPivot" type="Marker3D" parent="."]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1.2, 0)
+transform = Transform3D(-0.866025, -0.5, 7.57104e-08, -0.5, 0.866025, 4.37114e-08, -8.74228e-08, 0, -1, 0, 1.2, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CamPivot"]
-transform = Transform3D(-3.09086e-08, 0.707107, -0.707107, 3.09086e-08, 0.707107, 0.707107, 1, 0, -4.37114e-08, -8, 7, 1.74846e-07)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5.5, 0, 0)
 
 [node name="StepTimer" type="Timer" parent="."]
 wait_time = 0.3
 one_shot = true
+
+[node name="JournalistModel" parent="." instance=ExtResource("2_onrkg")]
+unique_name_in_owner = true
+
+[node name="GeneralSkeleton" parent="JournalistModel/GameRig" index="0"]
+bones/0/position = Vector3(-7.02416e-08, 0.947865, 0.0141288)
+bones/0/rotation = Quaternion(0, 0, 0, 1)
+bones/1/rotation = Quaternion(-1.07102e-08, 8.38044e-17, -1.29755e-14, 1)
+bones/2/rotation = Quaternion(0, 0, 0, 1)
+bones/3/rotation = Quaternion(-7.45058e-09, 0, -2.84078e-14, 1)
+bones/4/rotation = Quaternion(0, 0, 0, 1)
+bones/5/rotation = Quaternion(0, 0, 0, 1)
+bones/7/rotation = Quaternion(0.5, 0.5, 0.5, -0.5)
+bones/8/rotation = Quaternion(0, 1, 0, 5.96046e-08)
+bones/10/rotation = Quaternion(4.21468e-08, -0.707107, 4.21468e-08, 0.707107)
+bones/12/rotation = Quaternion(2.82617e-14, 0.707107, 2.82617e-14, 0.707107)
+bones/13/rotation = Quaternion(0.5, -0.5, -0.5, -0.5)
+bones/14/rotation = Quaternion(1.78814e-07, 1, 0, 0)
+bones/16/rotation = Quaternion(0, 0.707107, -2.10734e-08, 0.707107)
+bones/18/rotation = Quaternion(-2.10734e-08, -0.707107, -2.10735e-08, 0.707107)
+bones/22/rotation = Quaternion(4.76554e-16, 9.31323e-10, 1, 5.02512e-15)
+bones/24/rotation = Quaternion(-2.84217e-14, 1, 2.79397e-09, -1.11022e-15)
+bones/26/rotation = Quaternion(-9.42056e-15, 0.707107, -0.707107, -9.42056e-15)
+bones/27/rotation = Quaternion(3.01458e-14, 1, 2.98023e-08, 7.03402e-14)
+bones/29/rotation = Quaternion(2.96537e-16, 0, 1, -2.2847e-14)
+bones/31/rotation = Quaternion(0, 1, -1.16415e-09, -4.44089e-16)
+bones/33/rotation = Quaternion(-4.11364e-14, 0.707107, -0.707107, 3.92523e-14)
+bones/34/rotation = Quaternion(2.00972e-14, 1, 0, -4.01944e-14)
+
+[node name="AnimationPlayer" parent="JournalistModel/GameRig" index="1"]
+autoplay = "run-anim/mixamo_com"
+
+[editable path="JournalistModel"]

@@ -14,7 +14,7 @@ material = SubResource("StandardMaterial3D_0lnye")
 material = SubResource("StandardMaterial3D_0lnye")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_0lnye"]
-radius = 10.0
+radius = 12.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4ph3p"]
 albedo_color = Color(0, 0.793689, 0.776503, 1)
@@ -24,7 +24,7 @@ material = SubResource("StandardMaterial3D_4ph3p")
 radius = 0.4
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0lnye"]
-size = Vector3(0.879238, 0.7, 0.372103)
+size = Vector3(0.879238, 0.7, 0.600602)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s13u0"]
 albedo_color = Color(4.71681e-06, 0.994074, 0.000182512, 1)
@@ -35,6 +35,8 @@ size = Vector3(0.665, 0.39, 0.215)
 
 [node name="Crackhead" type="CharacterBody3D"]
 script = ExtResource("1_0lnye")
+tracking_speed = 3.0
+tracking_accel = 6.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -64,10 +66,11 @@ mesh = SubResource("SphereMesh_s13u0")
 
 [node name="RaycastOrigin" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
 
 [node name="HearingCast" type="RayCast3D" parent="RaycastOrigin"]
 unique_name_in_owner = true
-target_position = Vector3(0, 0, -10)
+target_position = Vector3(0, 0, -12)
 collision_mask = 3
 
 [node name="ChargeCast" type="RayCast3D" parent="RaycastOrigin"]
@@ -77,7 +80,7 @@ collision_mask = 3
 
 [node name="WallhackCast" type="RayCast3D" parent="RaycastOrigin"]
 unique_name_in_owner = true
-target_position = Vector3(0, 0, -10)
+target_position = Vector3(0, 0, -12)
 collision_mask = 2
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
@@ -92,12 +95,13 @@ collision_layer = 0
 collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ChargeCollision"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.613902)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.499652)
 shape = SubResource("BoxShape3D_0lnye")
 debug_color = Color(1, 0.0229599, 0.0851782, 1)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ChargeCollision"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, -0.7)
+visible = false
 mesh = SubResource("BoxMesh_wj4b2")
 
 [connection signal="timeout" from="BonkRecoveryTimer" to="." method="_on_bonk_recovery_timer_timeout"]
