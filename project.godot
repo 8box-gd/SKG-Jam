@@ -21,6 +21,10 @@ config/icon="res://icon.svg"
 Carryovers="*res://carryovers.gd"
 FadeTransition="*res://fade_transition.tscn"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/func_godot/plugin.cfg")
+
 [global_group]
 
 Player=""
@@ -66,4 +70,3 @@ left_click={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-shading/overrides/force_vertex_shading=true

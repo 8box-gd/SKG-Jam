@@ -54,7 +54,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	# Camera handlng
 	cam_pivot.rotation.x += _cam_input_direction.y * y_axis_sensitivity * delta 
-	cam_pivot.rotation.x = clamp(cam_pivot.rotation.x, -PI/3.0, PI/6.0)
+	cam_pivot.rotation.x = clamp(cam_pivot.rotation.x, -PI/4.0, PI/6.0)
 	cam_pivot.rotation.y -= _cam_input_direction.x * delta
 	_cam_input_direction = Vector2.ZERO
 	

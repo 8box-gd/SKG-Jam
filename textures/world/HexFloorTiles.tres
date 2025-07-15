@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://biu6r8if6q1wd"]
+
+[ext_resource type="Texture2D" uid="uid://c6bvrw0i4qhiy" path="res://textures/world/HexFloorTiles.png" id="1_38gmr"]
+
+[resource]
+albedo_texture = ExtResource("1_38gmr")
+metallic_specular = 0.0
+texture_filter = 2
