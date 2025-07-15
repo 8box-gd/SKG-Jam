@@ -1,3 +1,4 @@
+@icon("res://icons/icon_light_bulb.svg")
 extends Area3D
 
 @onready var unlit: MeshInstance3D = $Unlit

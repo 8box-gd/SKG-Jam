@@ -11,10 +11,8 @@ var patrol_points: Array[Node]
 func _ready() -> void:
 	FadeTransition.fade_from_black()
 
-
 func _on_crackhead_get_patrol_points(me: CharacterBody3D) -> void:
 	pass
-
 
 func _on_player_ded() -> void:
 	await FadeTransition.fade_to_black(0.8)

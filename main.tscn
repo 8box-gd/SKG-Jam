@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c5p8ihbithyln"]
+[gd_scene load_steps=14 format=3 uid="uid://c5p8ihbithyln"]
 
 [ext_resource type="Script" uid="uid://v2le1bhw1vji" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://dr4jhgs6v78ji" path="res://player.tscn" id="2_0xm2m"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://dx5uorv68000j" path="res://patrol_container.gd" id="5_7mycd"]
 [ext_resource type="PackedScene" uid="uid://552l02ebnhgv" path="res://patrol_point.tscn" id="5_lquwl"]
 [ext_resource type="PackedScene" uid="uid://pmk7r1j14c54" path="res://torch.tscn" id="7_272bh"]
+[ext_resource type="PackedScene" uid="uid://dkh5mwl0r2sck" path="res://objective.tscn" id="8_5vw27"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_h2yge"]
 vertices = PackedVector3Array(-11, 0.5, -24.75, 21.5, 0.5, -25, 21.5, 0.5, -26, -12.5, 0.5, -26, -12.5, 0.5, 22, -11, 0.5, 22, 8, 0.5, 6, 8.25, 0.5, 7, 20, 0.5, 7, 20, 0.5, -22.75, -8.75, 0.5, -22.75, -8.75, 0.5, 6, 7.75, 0.5, 8.25, 6.25, 0.5, 8.25, 6.5, 0.5, 20, 20, 0.5, 20, -8.75, 0.5, 8.25, -8.75, 0.5, 20)
@@ -101,6 +102,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, 15)
 
 [node name="Torch2" parent="TorchesContainer" instance=ExtResource("7_272bh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 1, 1)
+
+[node name="Objective" parent="." instance=ExtResource("8_5vw27")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 12)
 
 [connection signal="ded" from="Player" to="." method="_on_player_ded"]
 [connection signal="get_patrol_points" from="Crackhead" to="." method="_on_crackhead_get_patrol_points"]

@@ -1,7 +1,9 @@
 extends Node
 
 var door_code := "111111" # Default door code should be 111111
+var objectives_found := 0
 var lit_torches: Array[String]
+var found_objectives_list: Array[String]
 
 func _ready() -> void:
 	door_code = roll_door_code()
