@@ -1,42 +1,296 @@
-[gd_scene load_steps=7 format=3 uid="uid://cln33xt0s42ur"]
+[gd_scene load_steps=21 format=3 uid="uid://cln33xt0s42ur"]
 
 [ext_resource type="PackedScene" uid="uid://b32iyfljktiu7" path="res://Blender/Journalist.blend" id="1_12kyp"]
 [ext_resource type="AnimationLibrary" uid="uid://0pdqgs8bptxx" path="res://Blender/Mixamo/FallFlat.res" id="2_0ftfr"]
+[ext_resource type="Texture2D" uid="uid://b52h7h3s6gsc8" path="res://Blender/Texture.png" id="2_5lm3d"]
+[ext_resource type="Script" uid="uid://b1watypf4p2wv" path="res://Blender/journalist_model.gd" id="2_frj0t"]
 [ext_resource type="AnimationLibrary" uid="uid://bt4euvetdfvgd" path="res://Blender/Mixamo/Idle.res" id="2_gskp0"]
 [ext_resource type="AnimationLibrary" uid="uid://bx0ivncsns1fy" path="res://Blender/Mixamo/SneakWalk.res" id="2_k0od3"]
 [ext_resource type="AnimationLibrary" uid="uid://pud8e0jah3yp" path="res://Blender/run-anim.res" id="2_ouax1"]
 [ext_resource type="AnimationLibrary" uid="uid://wjykbpo1103j" path="res://Blender/Mixamo/GetUp.res" id="3_svgy6"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_frj0t"]
+resource_name = "JournoBody"
+cull_mode = 2
+albedo_color = Color(0, 0, 0, 1)
+metallic = 1.0
+emission_enabled = true
+emission_texture = ExtResource("2_5lm3d")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y8ly3"]
+resource_name = "JournoBody"
+cull_mode = 2
+albedo_color = Color(0, 0, 0, 1)
+metallic = 1.0
+emission_enabled = true
+emission_texture = ExtResource("2_5lm3d")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l6gv7"]
+resource_name = "JournoBody"
+cull_mode = 2
+albedo_color = Color(0, 0, 0, 1)
+metallic = 1.0
+emission_enabled = true
+emission_texture = ExtResource("2_5lm3d")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ynfhe"]
+resource_name = "JournoBody"
+cull_mode = 2
+albedo_color = Color(0, 0, 0, 1)
+metallic = 1.0
+emission_enabled = true
+emission_texture = ExtResource("2_5lm3d")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_polmy"]
+resource_name = "JournoBody"
+cull_mode = 2
+albedo_color = Color(0, 0, 0, 1)
+metallic = 1.0
+emission_enabled = true
+emission_texture = ExtResource("2_5lm3d")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5wuc2"]
+resource_name = "JournoBody"
+cull_mode = 2
+albedo_color = Color(0, 0, 0, 1)
+metallic = 1.0
+emission_enabled = true
+emission_texture = ExtResource("2_5lm3d")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oywbp"]
+resource_name = "JournoBody"
+cull_mode = 2
+albedo_color = Color(0, 0, 0, 1)
+metallic = 1.0
+emission_enabled = true
+emission_texture = ExtResource("2_5lm3d")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7jple"]
+resource_name = "JournoBody"
+cull_mode = 2
+albedo_color = Color(0, 0, 0, 1)
+metallic = 1.0
+emission_enabled = true
+emission_texture = ExtResource("2_5lm3d")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xrhxp"]
+resource_name = "JournoBody"
+cull_mode = 2
+albedo_color = Color(0, 0, 0, 1)
+metallic = 1.0
+emission_enabled = true
+emission_texture = ExtResource("2_5lm3d")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lhbhe"]
+resource_name = "JournoBody"
+cull_mode = 2
+albedo_color = Color(0, 0, 0, 1)
+metallic = 1.0
+emission_enabled = true
+emission_texture = ExtResource("2_5lm3d")
+
+[sub_resource type="Animation" id="Animation_frj0t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%GeneralSkeleton/Arm:surface_material_override/0:emission_energy_multiplier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%GeneralSkeleton/Beret:surface_material_override/0:emission_energy_multiplier")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%GeneralSkeleton/Face:surface_material_override/0:emission_energy_multiplier")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%GeneralSkeleton/Foot:surface_material_override/0:emission_energy_multiplier")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("%GeneralSkeleton/Hair:surface_material_override/0:emission_energy_multiplier")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("%GeneralSkeleton/Hand:surface_material_override/0:emission_energy_multiplier")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("%GeneralSkeleton/Leg:surface_material_override/0:emission_energy_multiplier")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("%GeneralSkeleton/Neck:surface_material_override/0:emission_energy_multiplier")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("%GeneralSkeleton/Torso:surface_material_override/0:emission_energy_multiplier")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("%GeneralSkeleton/Waist:surface_material_override/0:emission_energy_multiplier")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("%GeneralSkeleton:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y8ly3"]
+_data = {
+&"RESET": SubResource("Animation_frj0t")
+}
+
 [node name="Journalist" instance=ExtResource("1_12kyp")]
+script = ExtResource("2_frj0t")
 
 [node name="GeneralSkeleton" parent="GameRig" index="0"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-bones/0/position = Vector3(0.0336611, 0.0762571, 0.102555)
-bones/0/rotation = Quaternion(0.693461, -0.0048718, 0.00770271, 0.720437)
-bones/1/rotation = Quaternion(0.0311641, 0.00191985, -0.00973657, 0.999465)
-bones/2/rotation = Quaternion(0.00640769, 0.000452576, -0.00148473, 0.999978)
-bones/3/rotation = Quaternion(0.00640483, 0.000474791, -0.00148401, 0.999978)
-bones/4/rotation = Quaternion(-0.0520746, -0.116261, 0.0615724, 0.98994)
-bones/5/rotation = Quaternion(-0.0614741, -0.480417, -0.0621138, 0.872675)
-bones/7/rotation = Quaternion(0.399999, 0.554465, 0.603166, -0.410805)
-bones/8/rotation = Quaternion(0.0571701, 0.827943, -0.51408, -0.216711)
-bones/10/rotation = Quaternion(0.142074, -0.692687, 0.142074, 0.692687)
-bones/12/rotation = Quaternion(-0.0162125, 0.892319, -0.162462, 0.420844)
-bones/13/rotation = Quaternion(0.457393, -0.512349, -0.613161, -0.390287)
-bones/14/rotation = Quaternion(0.0813673, 0.884096, -0.444415, 0.119365)
-bones/16/rotation = Quaternion(0.207293, 0.67604, -0.207293, 0.67604)
-bones/18/rotation = Quaternion(-0.100354, -0.791114, 0.178805, 0.576278)
-bones/22/rotation = Quaternion(0.0654869, 0.0757525, 0.99342, -0.0555821)
-bones/24/rotation = Quaternion(-0.0224029, 0.986175, -0.138671, 0.0879076)
-bones/26/rotation = Quaternion(0.165347, 0.85792, -0.42494, 0.236769)
-bones/27/rotation = Quaternion(1.05649e-07, 1, -0.000391603, -1.32791e-07)
-bones/29/rotation = Quaternion(-0.0804869, 0.0925344, 0.989592, 0.0752832)
-bones/31/rotation = Quaternion(0.00668613, 0.98098, -0.178066, -0.0769852)
-bones/33/rotation = Quaternion(-0.120343, 0.825411, -0.453301, -0.314217)
-bones/34/rotation = Quaternion(4.79393e-08, 0.998929, -0.0462714, -4.03381e-08)
+bones/0/position = Vector3(0.00339953, 0.821536, 0.00962871)
+bones/0/rotation = Quaternion(0.0986905, -0.0037504, -0.0476308, 0.993971)
+bones/1/rotation = Quaternion(0.0877729, 0.00688201, 0.0666351, 0.993886)
+bones/2/rotation = Quaternion(0.0177045, -0.000488751, 0.00442951, 0.999833)
+bones/3/rotation = Quaternion(0.043507, -0.000528792, 0.0016064, 0.999052)
+bones/4/rotation = Quaternion(-0.0335078, -0.0030612, -0.00232398, 0.999431)
+bones/5/rotation = Quaternion(-0.140482, 0.00314512, -0.0281138, 0.989679)
+bones/7/rotation = Quaternion(0.525524, 0.459763, 0.571169, -0.431519)
+bones/8/rotation = Quaternion(-0.0201575, 0.872774, -0.47102, -0.126489)
+bones/10/rotation = Quaternion(0.5, -0.500001, 0.5, 0.499999)
+bones/12/rotation = Quaternion(-0.054652, 0.725353, 0.0907908, 0.680171)
+bones/13/rotation = Quaternion(0.524761, -0.460178, -0.57216, -0.430691)
+bones/14/rotation = Quaternion(-0.254351, 0.905611, -0.336455, -0.0444032)
+bones/16/rotation = Quaternion(0.501187, 0.49881, -0.501186, 0.498811)
+bones/18/rotation = Quaternion(0.000931278, -0.73823, -0.14807, 0.658096)
+bones/22/rotation = Quaternion(0.0261591, 0.41575, 0.906488, -0.068898)
+bones/24/rotation = Quaternion(-0.0421435, 0.43383, -0.899858, 0.0164764)
+bones/26/rotation = Quaternion(-0.011527, 0.682476, -0.730516, 0.0209876)
+bones/27/rotation = Quaternion(-1.51469e-08, 0.999998, 0.00200722, -2.61662e-08)
+bones/29/rotation = Quaternion(-0.0723443, 0.313871, 0.943249, -0.0808306)
+bones/31/rotation = Quaternion(-0.0117611, 0.879861, -0.47508, -0.00215811)
+bones/33/rotation = Quaternion(-0.0443802, 0.485511, -0.871638, 0.0505629)
+bones/34/rotation = Quaternion(2.46819e-09, 0.99992, -0.0126476, -3.78749e-09)
+
+[node name="Arm" parent="GameRig/GeneralSkeleton" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_frj0t")
+
+[node name="Beret" parent="GameRig/GeneralSkeleton" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_y8ly3")
+
+[node name="Face" parent="GameRig/GeneralSkeleton" index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_l6gv7")
+
+[node name="Foot" parent="GameRig/GeneralSkeleton" index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ynfhe")
+
+[node name="Hair" parent="GameRig/GeneralSkeleton" index="4"]
+surface_material_override/0 = SubResource("StandardMaterial3D_polmy")
+
+[node name="Hand" parent="GameRig/GeneralSkeleton" index="5"]
+surface_material_override/0 = SubResource("StandardMaterial3D_5wuc2")
+
+[node name="Leg" parent="GameRig/GeneralSkeleton" index="6"]
+surface_material_override/0 = SubResource("StandardMaterial3D_oywbp")
+
+[node name="Neck" parent="GameRig/GeneralSkeleton" index="7"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7jple")
+
+[node name="Torso" parent="GameRig/GeneralSkeleton" index="8"]
+surface_material_override/0 = SubResource("StandardMaterial3D_xrhxp")
+
+[node name="Waist" parent="GameRig/GeneralSkeleton" index="9"]
+surface_material_override/0 = SubResource("StandardMaterial3D_lhbhe")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="GameRig" index="1"]
 libraries = {
+&"": SubResource("AnimationLibrary_y8ly3"),
 &"FallFlat": ExtResource("2_0ftfr"),
 &"GetUp": ExtResource("3_svgy6"),
 &"Idle": ExtResource("2_gskp0"),

@@ -112,7 +112,7 @@ func update_player_pos() -> void:
 	nav_agent.target_position = last_known_player_position # Here so it doesnt update every frame
 
 func find_patrol_point() -> void:
-	print("Picking random patrol point")
+	#print("Picking random patrol point")
 	last_known_player_position = patrol_points.pick_random().global_position
 	last_pos_indicator.global_position = last_known_player_position
 	nav_agent.target_position = last_known_player_position
@@ -121,6 +121,9 @@ func find_patrol_point() -> void:
 func _on_charge_collision_body_entered(body: Node3D) -> void:
 	if body == self: return
 	if state != CHARGE: return
+	if body.is_in_group("Player"):
+		player.die()
+		return
 	velocity = -velocity * 0.3
 	bonk_recovery_timer.start()
 	state = BONK

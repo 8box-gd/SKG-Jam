@@ -6,9 +6,13 @@ extends CharacterBody3D
 @onready var step_timer: Timer = $StepTimer
 @onready var model: Node3D = %JournalistModel
 @onready var anim_player: AnimationPlayer = $JournalistModel/GameRig/AnimationPlayer
+@onready var life_timer: Timer = $LifeTimer
+@onready var time_label: Label = $TimeLabel
 
 signal footstep
+signal ded
 
+@export_group("Params")
 @export_range(0.0, 1.0) var mouse_sensitivity := 0.25
 @export_range(0.0, 1.0) var y_axis_sensitivity := 1.0
 @export var move_speed := 8.0
@@ -30,7 +34,7 @@ func _ready() -> void:
 	# WAKE UP JEFF
 	anim_player.play("GetUp/mixamo_com")
 	await anim_player.animation_finished
-	has_control = true
+	if not dead: has_control = true
 
 # Capturing an uncapturing the mouse
 func _input(event: InputEvent) -> void:
@@ -90,6 +94,8 @@ func _physics_process(delta: float) -> void:
 		step_timer.start()
 	
 	if has_control: handle_animations()
+	
+	time_label.text = str(int(life_timer.time_left))
 
 func handle_animations() -> void:
 	if sneaking:
@@ -97,3 +103,15 @@ func handle_animations() -> void:
 		else: anim_player.play("CrouchIdle/mixamo_com")
 	elif velocity.length() > 0: anim_player.play("run-anim/mixamo_com")
 	else: anim_player.play("Idle/mixamo_com")
+
+func _on_life_timer_timeout() -> void:
+	die()
+
+func die() -> void:
+	if dead: return
+	dead = true
+	velocity = Vector3.ZERO
+	has_control = false
+	anim_player.play("FallFlat/mixamo_com")
+	await anim_player.animation_finished
+	ded.emit()

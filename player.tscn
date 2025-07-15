@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dr4jhgs6v78ji"]
+[gd_scene load_steps=19 format=3 uid="uid://dr4jhgs6v78ji"]
 
 [ext_resource type="Script" uid="uid://ce7u0iwfxk5nx" path="res://player.gd" id="1_4flbx"]
 [ext_resource type="PackedScene" uid="uid://cln33xt0s42ur" path="res://Blender/journalist_model_scene.tscn" id="2_onrkg"]
@@ -1536,10 +1536,13 @@ _data = {
 &"mixamo_com": SubResource("Animation_la73h")
 }
 
+[sub_resource type="LabelSettings" id="LabelSettings_2hs0m"]
+font_size = 70
+
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
 collision_layer = 3
 script = ExtResource("1_4flbx")
-mouse_sensitivity = 0.15
+mouse_sensitivity = 0.12
 y_axis_sensitivity = 0.75
 sneak_speed = 3.0
 
@@ -1608,5 +1611,19 @@ libraries = {
 &"run-anim": SubResource("AnimationLibrary_nvl01")
 }
 autoplay = "run-anim/mixamo_com"
+
+[node name="LifeTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[node name="TimeLabel" type="Label" parent="."]
+offset_left = 8.0
+offset_right = 88.0
+offset_bottom = 96.0
+text = "60"
+label_settings = SubResource("LabelSettings_2hs0m")
+
+[connection signal="timeout" from="LifeTimer" to="." method="_on_life_timer_timeout"]
 
 [editable path="JournalistModel"]
