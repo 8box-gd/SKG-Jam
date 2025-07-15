@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-enum {WANDERING, TRACKING, WINDUP, CHARGE, BONK, STAB}
+enum {TRACKING, CHARGE, BONK, RUSH, KILL}
 @onready var hearing_cast: RayCast3D = %HearingCast
 @onready var charge_cast: RayCast3D = %ChargeCast
 @onready var hearing_range: Area3D = $HearingRange # If you're in this sphere, he can hear you
@@ -99,8 +99,10 @@ func on_player_footstep():
 					move_dir = to_local(player.global_position)
 					move_dir = move_dir.normalized()
 					state = CHARGE
-				else: # No line of sight
+				else: # No line of sight, track behind wall
 					update_player_pos()
+		RUSH:
+			state = TRACKING
 		CHARGE: pass # Unaffected by footsteps
 		_: pass
 

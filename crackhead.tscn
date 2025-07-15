@@ -34,6 +34,7 @@ material = SubResource("StandardMaterial3D_s13u0")
 size = Vector3(0.665, 0.39, 0.215)
 
 [node name="Crackhead" type="CharacterBody3D"]
+collision_layer = 0
 script = ExtResource("1_0lnye")
 tracking_speed = 3.0
 tracking_accel = 6.0

@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 @onready var cam_pivot: Marker3D = $CamPivot
-@onready var camera: Camera3D = $CamPivot/Camera3D
+@onready var camera: Camera3D = %Camera3D
 @onready var debug_cap: MeshInstance3D = $DebugCap
 @onready var step_timer: Timer = $StepTimer
 @onready var model: Node3D = %JournalistModel
@@ -9,6 +9,8 @@ extends CharacterBody3D
 
 signal footstep
 
+@export_range(0.0, 1.0) var mouse_sensitivity := 0.25
+@export_range(0.0, 1.0) var y_axis_sensitivity := 1.0
 @export var move_speed := 8.0
 @export var sneak_speed := 4.0
 @export var acceleration := 20.0
@@ -30,9 +32,27 @@ func _ready() -> void:
 	await anim_player.animation_finished
 	has_control = true
 
+# Capturing an uncapturing the mouse
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("left_click"):
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	if event.is_action_pressed("ui_cancel"):
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+# Mouse movement
+func _unhandled_input(event: InputEvent) -> void:
+	var is_camera_motion := (event is InputEventMouseMotion and
+		Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED)
+	if is_camera_motion:
+		_cam_input_direction = event.screen_relative * mouse_sensitivity
+
 # Negative Z is forward
 func _physics_process(delta: float) -> void:
-	
+	# Camera handlng
+	cam_pivot.rotation.x += _cam_input_direction.y * y_axis_sensitivity * delta 
+	cam_pivot.rotation.x = clamp(cam_pivot.rotation.x, -PI/3.0, PI/6.0)
+	cam_pivot.rotation.y -= _cam_input_direction.x * delta
+	_cam_input_direction = Vector2.ZERO
 	
 	var raw_input := Vector2.ZERO
 	if has_control:
