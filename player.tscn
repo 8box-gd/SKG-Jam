@@ -1549,6 +1549,7 @@ script = ExtResource("1_4flbx")
 mouse_sensitivity = 0.12
 y_axis_sensitivity = 0.6
 sneak_speed = 3.0
+acceleration = 25.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

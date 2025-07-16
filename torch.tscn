@@ -6,7 +6,7 @@
 radius = 0.9
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pa17o"]
-albedo_color = Color(0.15, 0.15, 0.17, 1)
+albedo_color = Color(0.33, 0.328405, 0.2343, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_s1444"]
 material = SubResource("StandardMaterial3D_pa17o")
@@ -26,17 +26,19 @@ script = ExtResource("1_pa17o")
 shape = SubResource("SphereShape3D_5w7kb")
 
 [node name="Unlit" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 layers = 2
 mesh = SubResource("SphereMesh_s1444")
 
 [node name="LitBeacon" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 visible = false
 layers = 2
 mesh = SubResource("SphereMesh_kx7w4")
 
 [node name="OmniLight" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.709049, 0)
-light_color = Color(0.87, 0.9, 0, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.89734, 0)
+light_color = Color(0.8886, 0.9, 0.558, 1)
 light_cull_mask = 4294967293
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -33,11 +33,15 @@ var dead := false
 
 func _ready() -> void:
 	current_speed = move_speed
+	if Carryovers.found_keypad or Carryovers.objectives_found > 0:
+		update_objective()
 	
 	# WAKE UP JEFF
 	anim_player.play("GetUp/mixamo_com")
 	await anim_player.animation_finished
 	if not dead: has_control = true
+	
+	
 
 # Capturing an uncapturing the mouse
 func _input(event: InputEvent) -> void:
