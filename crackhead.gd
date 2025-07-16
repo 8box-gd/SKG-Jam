@@ -11,6 +11,7 @@ enum {TRACKING, CHARGE, BONK, RUSH, KILL}
 @onready var bonk_recovery_timer: Timer = $BonkRecoveryTimer
 @onready var debug_cap: MeshInstance3D = $DebugCap
 @onready var charge_collision: Area3D = $ChargeCollision
+@onready var charge_cooldown: Timer = $ChargeCooldown
 
 signal get_patrol_points(me: CharacterBody3D)
 
@@ -73,6 +74,7 @@ func tracking_state(delta: float) -> void:
 		if charge_cast.get_collider().is_in_group("Player"):
 			update_player_pos()
 			move_dir = to_local(player.global_position + Vector3(0,1,0))
+			move_dir.y = 0.0
 			move_dir = move_dir.normalized()
 			state = CHARGE
 
@@ -88,13 +90,14 @@ func bonk_state(delta: float) -> void: #Transition out of BONK is done by timer
 
 func _on_bonk_recovery_timer_timeout() -> void:
 	state = TRACKING
+	charge_cooldown.start()
 
 func on_player_footstep():
 	match state:
 		TRACKING: 
 			# Since hearing_cast can still touch walls if youre out of range
 			if hearing_cast.is_colliding() and wallhack_cast.is_colliding():
-				if hearing_cast.get_collider().is_in_group("Player"): # Line of sight w Player
+				if hearing_cast.get_collider().is_in_group("Player") and charge_cooldown.time_left == 0.0: # Line of sight w Player
 					update_player_pos()
 					move_dir = to_local(player.global_position)
 					move_dir = move_dir.normalized()

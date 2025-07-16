@@ -105,5 +105,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, -0.7)
 visible = false
 mesh = SubResource("BoxMesh_wj4b2")
 
+[node name="ChargeCooldown" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
 [connection signal="timeout" from="BonkRecoveryTimer" to="." method="_on_bonk_recovery_timer_timeout"]
 [connection signal="body_entered" from="ChargeCollision" to="." method="_on_charge_collision_body_entered"]

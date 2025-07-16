@@ -3,6 +3,7 @@ extends Node2D
 @onready var keypad_sprite: Sprite2D = $KeypadSprite
 @onready var remembered_label: RichTextLabel = $RememberedLabel
 @onready var input_label: Label = $InputLabel
+@onready var help_label: Label = $HelpLabel
 signal keypad_solved
 
 var displayed_numbers := ""
@@ -39,6 +40,9 @@ func _input(event: InputEvent) -> void:
 		displayed_numbers += "9"
 	if event.is_action_pressed("zero"):
 		displayed_numbers += "0"
+	
+	if event.is_action_pressed("ui_cancel"):
+		help_label.visible = true
 	
 	input_label.text = displayed_numbers
 	if displayed_numbers.length() == 6:

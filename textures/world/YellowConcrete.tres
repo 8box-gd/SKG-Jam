@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bipbc84qn25rl"]
+
+[ext_resource type="Texture2D" uid="uid://bnu0e2bc1gwx2" path="res://textures/world/YellowConcrete.png" id="1_cve7a"]
+
+[resource]
+albedo_texture = ExtResource("1_cve7a")
+metallic_specular = 0.0
+texture_filter = 2

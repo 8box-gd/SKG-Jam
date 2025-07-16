@@ -8,7 +8,7 @@ var found_keypad := false
 
 func _ready() -> void:
 	door_code = roll_door_code()
-	print("Door code: ", door_code)
+	#print("Door code: ", door_code)
 
 func roll_door_code() -> String:
 	return "%06d" % randi_range(0, 999999)
