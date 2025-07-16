@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://dff0jtrv1m5rh"]
+
+[ext_resource type="Script" uid="uid://ntcw2pwwvl6h" path="res://keypad.gd" id="1_0sp1t"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_os0ty"]
+size = Vector3(2, 1, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_os0ty"]
+
+[node name="Keypad" type="Node3D"]
+script = ExtResource("1_0sp1t")
+
+[node name="DetectionRange" type="Area3D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionRange"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.551352, 0.5)
+shape = SubResource("BoxShape3D_os0ty")
+debug_color = Color(0.976911, 0.125697, 0, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.8, 0, 0, 0, 1, 0, 0, 0, 0.2, 0, 1, -0.6)
+mesh = SubResource("BoxMesh_os0ty")
+
+[connection signal="body_entered" from="DetectionRange" to="." method="_on_detection_range_body_entered"]
+[connection signal="body_exited" from="DetectionRange" to="." method="_on_detection_range_body_exited"]

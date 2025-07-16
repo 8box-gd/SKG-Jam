@@ -8,6 +8,8 @@ extends CharacterBody3D
 @onready var anim_player: AnimationPlayer = $JournalistModel/GameRig/AnimationPlayer
 @onready var life_timer: Timer = $LifeTimer
 @onready var time_label: Label = $TimeLabel
+@onready var keypad_ui: Node2D = $KeypadUI
+@onready var objective_label: Label = $ObjectiveLabel
 
 signal footstep
 signal ded
@@ -15,6 +17,7 @@ signal ded
 @export_group("Params")
 @export_range(0.0, 1.0) var mouse_sensitivity := 0.25
 @export_range(0.0, 1.0) var y_axis_sensitivity := 1.0
+@export var keypad_object: Node3D
 @export var move_speed := 8.0
 @export var sneak_speed := 4.0
 @export var acceleration := 20.0
@@ -115,3 +118,28 @@ func die() -> void:
 	anim_player.play("FallFlat/mixamo_com")
 	await anim_player.animation_finished
 	ded.emit()
+
+func _on_keypad_show_keypad() -> void:
+	print("Player: Got here")
+	keypad_ui.start_keypad()
+
+func _on_keypad_hide_keypad() -> void:
+	keypad_ui.leave_keypad()
+
+func start_keypad() -> void:
+	#print("Player: Got here")
+	keypad_ui.start_keypad()
+
+func leave_keypad() -> void:
+	#print("Player: Got here")
+	keypad_ui.leave_keypad()
+
+
+func _on_keypad_ui_keypad_solved() -> void:
+	print("Player: Keypad solved")
+
+func update_objective() -> void:
+	if Carryovers.found_keypad:
+		objective_label.text = "Digits found: " + str(Carryovers.objectives_found) + "/6"
+	else: 
+		objective_label.text = "Digits found: " + str(Carryovers.objectives_found)

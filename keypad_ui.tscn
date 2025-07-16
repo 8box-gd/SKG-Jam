@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://brf3lhrlvfhw4"]
+
+[ext_resource type="Script" uid="uid://blgj2uyjqwdth" path="res://keypad_ui.gd" id="1_j2e88"]
+[ext_resource type="Texture2D" uid="uid://dbulqew8eeo05" path="res://icon.svg" id="1_kckd0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_kckd0"]
+font_size = 35
+
+[node name="KeypadUI" type="Node2D"]
+script = ExtResource("1_j2e88")
+
+[node name="KeypadSprite" type="Sprite2D" parent="."]
+position = Vector2(972, 321)
+scale = Vector2(1.125, 1.82813)
+texture = ExtResource("1_kckd0")
+
+[node name="InputLabel" type="Label" parent="."]
+offset_left = 913.0
+offset_top = 219.0
+offset_right = 953.0
+offset_bottom = 242.0
+text = "123456"
+label_settings = SubResource("LabelSettings_kckd0")
+
+[node name="RememberedLabel" type="RichTextLabel" parent="."]
+offset_left = 913.0
+offset_top = 151.0
+offset_right = 1181.0
+offset_bottom = 235.0
+bbcode_enabled = true
+text = "[font_size=35][color=MEDIUM_ORCHID][shake rate=20.0 level=5 connected=1]123456"
