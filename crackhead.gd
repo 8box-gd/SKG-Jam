@@ -49,6 +49,8 @@ func _physics_process(delta: float) -> void:
 			charge_collision.rotation.x = 0.0
 			charge_collision.rotation.z = 0.0
 	
+	# Gravity should affect it regardless of state
+	
 	match state:
 		TRACKING: tracking_state(delta)
 		CHARGE: charge_state(delta)
