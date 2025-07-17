@@ -1,8 +1,6 @@
 @icon("res://icons/icon_light_bulb.svg")
 extends Area3D
 
-@onready var unlit: MeshInstance3D = $Unlit
-@onready var lit_beacon: MeshInstance3D = $LitBeacon
 @onready var omni_light: OmniLight3D = $OmniLight
 @onready var fixture_off: MeshInstance3D = $FixtureOff
 @onready var fixture_on: MeshInstance3D = $FixtureOn
@@ -27,9 +25,9 @@ func light_up() -> void:
 	
 	if not name in Carryovers.lit_torches:
 		Carryovers.lit_torches.append(name)
+		print("Torches found: ", Carryovers.lit_torches.size())
 
 func turn_off() -> void:
-	lit_beacon.visible = false
 	omni_light.visible = false
 	fixture_on.visible = false
 	fixture_off.visible = true

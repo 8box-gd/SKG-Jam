@@ -1,14 +1,17 @@
-[gd_scene load_steps=12 format=3 uid="uid://bpkp86jm2uqxp"]
+[gd_scene load_steps=13 format=3 uid="uid://bpkp86jm2uqxp"]
 
 [ext_resource type="Script" uid="uid://gxbrnlxu5o5p" path="res://crackhead.gd" id="1_0lnye"]
+[ext_resource type="Texture2D" uid="uid://b6sslg7vb0hx8" path="res://icons/icon_skull.svg" id="2_4ph3p"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_w651x"]
+radius = 0.45
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0lnye"]
 albedo_color = Color(1, 0.1, 0, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_4ph3p"]
 material = SubResource("StandardMaterial3D_0lnye")
+radius = 0.45
 
 [sub_resource type="BoxMesh" id="BoxMesh_w651x"]
 material = SubResource("StandardMaterial3D_0lnye")
@@ -24,7 +27,7 @@ material = SubResource("StandardMaterial3D_4ph3p")
 radius = 0.4
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0lnye"]
-size = Vector3(0.879238, 0.7, 0.600602)
+size = Vector3(0.85, 0.7, 0.601)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s13u0"]
 albedo_color = Color(4.71681e-06, 0.994074, 0.000182512, 1)
@@ -51,6 +54,13 @@ mesh = SubResource("CapsuleMesh_4ph3p")
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.4, -0.6)
 visible = false
 mesh = SubResource("BoxMesh_w651x")
+
+[node name="ThruTheWalls" type="Sprite3D" parent="DebugCap"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0.461367, 0)
+billboard = 1
+no_depth_test = true
+texture_filter = 0
+texture = ExtResource("2_4ph3p")
 
 [node name="HearingRange" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

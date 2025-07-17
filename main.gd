@@ -6,6 +6,7 @@ extends Node3D
 @onready var player_life_timer: Timer = $PlayerLifeTimer
 @onready var player: Player = $Player
 @onready var exit_door: Node3D = $ExitDoor
+@onready var end_light: OmniLight3D = $EndingTrigger/EndLight
 
 var reached_ending := false
 
@@ -31,3 +32,6 @@ func start_ending() -> void:
 	reached_ending = true
 	player.life_timer.paused = true
 	exit_door.slam_shut()
+	crackhead.queue_free()
+	await get_tree().create_timer(1.0).timeout
+	end_light.visible = true

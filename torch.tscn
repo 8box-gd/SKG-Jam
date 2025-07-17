@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://pmk7r1j14c54"]
+[gd_scene load_steps=11 format=3 uid="uid://pmk7r1j14c54"]
 
 [ext_resource type="Script" uid="uid://cf3201mcisvfp" path="res://torch.gd" id="1_pa17o"]
 
@@ -6,17 +6,10 @@
 radius = 0.8
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pa17o"]
-albedo_color = Color(0.33, 0.328405, 0.2343, 1)
+albedo_color = Color(0.78, 0.77285, 0.351, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_s1444"]
 material = SubResource("StandardMaterial3D_pa17o")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w3qnr"]
-albedo_color = Color(1, 1, 0.17, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_kx7w4"]
-material = SubResource("StandardMaterial3D_w3qnr")
-radius = 0.55
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_pa17o"]
 load_path = "res://.godot/imported/DecoLight.png-78d5a675184a21914f9690499c58c150.ctex"
@@ -25,6 +18,7 @@ load_path = "res://.godot/imported/DecoLight.png-78d5a675184a21914f9690499c58c15
 transparency = 1
 albedo_texture = SubResource("CompressedTexture2D_pa17o")
 uv1_scale = Vector3(0.5, 1, 1)
+texture_filter = 2
 
 [sub_resource type="QuadMesh" id="QuadMesh_w3qnr"]
 material = SubResource("StandardMaterial3D_s1444")
@@ -48,20 +42,15 @@ script = ExtResource("1_pa17o")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_5w7kb")
 
-[node name="Unlit" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+[node name="Indicator" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 visible = false
 layers = 2
 mesh = SubResource("SphereMesh_s1444")
 
-[node name="LitBeacon" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
-visible = false
-layers = 2
-mesh = SubResource("SphereMesh_kx7w4")
-
 [node name="OmniLight" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.89734, 0)
+visible = false
 light_color = Color(0.8886, 0.9, 0.558, 1)
 light_cull_mask = 4294967293
 omni_range = 4.5

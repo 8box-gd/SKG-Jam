@@ -13,4 +13,4 @@ func open_door() -> void:
 func slam_shut() -> void:
 	var tween: Tween = get_tree().create_tween().set_trans(Tween.TRANS_LINEAR)
 	#NOTE: This final value will depend on how the door is oriented in the level
-	tween.tween_property(self, "rotation_degrees", Vector3(0.0, -2.0, 0.0), 0.4)
+	tween.tween_property(self, "rotation_degrees", Vector3(0.0, -90.0, 0.0), 0.4)

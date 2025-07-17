@@ -7,7 +7,7 @@ albedo_color = Color(0.803895, 0.415887, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_jpk4e"]
 material = SubResource("StandardMaterial3D_jpk4e")
-size = Vector3(0.5, 0.5, 0.5)
+size = Vector3(0.7, 0.5, 0.7)
 
 [node name="PatrolPoint" type="Node3D"]
 script = ExtResource("1_8r834")

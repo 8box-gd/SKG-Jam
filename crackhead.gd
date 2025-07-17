@@ -1,3 +1,4 @@
+@icon("res://icons/icon_skull.svg")
 extends CharacterBody3D
 
 enum {TRACKING, CHARGE, BONK, RUSH, KILL}
@@ -15,8 +16,11 @@ enum {TRACKING, CHARGE, BONK, RUSH, KILL}
 
 signal get_patrol_points(me: CharacterBody3D)
 
+@export_group("Siblings")
 @export var player: CharacterBody3D
 @export var points_contaner: Node3D
+@export var objective_container: Node3D
+@export_group("Movement")
 @export var tracking_speed := 4.0
 @export var tracking_accel := 8.0
 @export var charge_speed := 20.0
@@ -38,8 +42,9 @@ func _ready() -> void:
 		#print("Patrol points attained: ", patrol_points)
 	else:
 		print("Crackhead: Patrol points not found")
-	#get_patrol_points.emit(self)
 	
+	# Spawn at random objective
+	global_position = objective_container.get_children().pick_random().global_position
 
 func _physics_process(delta: float) -> void:
 	if player:

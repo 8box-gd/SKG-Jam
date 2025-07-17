@@ -1549,6 +1549,7 @@ collision_layer = 3
 script = ExtResource("1_4flbx")
 mouse_sensitivity = 0.12
 y_axis_sensitivity = 0.6
+move_speed = 7.0
 acceleration = 25.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
