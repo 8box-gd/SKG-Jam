@@ -1,11 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://dkh5mwl0r2sck"]
+[gd_scene load_steps=5 format=3 uid="uid://dkh5mwl0r2sck"]
 
 [ext_resource type="Script" uid="uid://ytfjrvvo5nvi" path="res://objective.gd" id="1_n0a23"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_igcyh"]
 size = Vector3(0.626953, 1, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n0a23"]
+albedo_color = Color(0.240921, 0.88, 0.451815, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_n0a23"]
+material = SubResource("StandardMaterial3D_n0a23")
 size = Vector3(0.1, 0.6, 0.4)
 
 [node name="Objective" type="Area3D"]

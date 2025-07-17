@@ -1,4 +1,4 @@
-extends CharacterBody3D
+class_name Player extends CharacterBody3D
 
 @onready var cam_pivot: Marker3D = $CamPivot
 @onready var camera: Camera3D = %Camera3D

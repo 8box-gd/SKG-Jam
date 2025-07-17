@@ -4,7 +4,6 @@ extends Node3D
 # its children won't be ready when Crackhead asks for the patrol points.
 
 var child_array: Array[Node]
-
 signal points_ready(me: Node3D)
 
 func _ready() -> void:
