@@ -1,3 +1,4 @@
+@icon("res://icons/icon_grid.svg")
 extends Node3D
 
 @export var player: CharacterBody3D

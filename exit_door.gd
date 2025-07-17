@@ -1,0 +1,9 @@
+extends Node3D
+
+func _ready() -> void:
+	open_door()
+
+func open_door():
+	var tween: Tween = get_tree().create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	#NOTE: This final value will depend on how the door is oriented in the level
+	tween.tween_property(self, "rotation_degrees", Vector3(0.0, -2.0, 0.0), 1.5)

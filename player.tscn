@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://brf3lhrlvfhw4" path="res://keypad_ui.tscn" id="7_1jxqw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
+radius = 0.45
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4flbx"]
 albedo_color = Color(0.406666, 0.11, 1, 1)
@@ -1548,7 +1549,6 @@ collision_layer = 3
 script = ExtResource("1_4flbx")
 mouse_sensitivity = 0.12
 y_axis_sensitivity = 0.6
-sneak_speed = 3.0
 acceleration = 25.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
