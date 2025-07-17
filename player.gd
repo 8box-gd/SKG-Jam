@@ -141,6 +141,7 @@ func leave_keypad() -> void:
 
 func _on_keypad_ui_keypad_solved() -> void:
 	print("Player: Keypad solved")
+	keypad_object.open_door()
 
 func update_objective() -> void:
 	if Carryovers.found_keypad:

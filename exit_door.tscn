@@ -8,7 +8,7 @@ albedo_texture = ExtResource("1_7sac5")
 
 [sub_resource type="QuadMesh" id="QuadMesh_pix1l"]
 material = SubResource("StandardMaterial3D_ti4c3")
-size = Vector2(1, 2.4)
+size = Vector2(1, 2.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7sac5"]
 size = Vector3(1, 2.4, 0.05)
@@ -17,7 +17,7 @@ size = Vector3(1, 2.4, 0.05)
 script = ExtResource("1_ti4c3")
 
 [node name="DoorFront" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1.25, 0)
 mesh = SubResource("QuadMesh_pix1l")
 
 [node name="DoorBack" type="MeshInstance3D" parent="."]

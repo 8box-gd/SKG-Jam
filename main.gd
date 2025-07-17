@@ -1,4 +1,3 @@
-@icon("res://icons/icon_door.svg")
 extends Node3D
 # Putting some shit here to make sure it works
 

@@ -19,7 +19,7 @@ shape = SubResource("BoxShape3D_os0ty")
 debug_color = Color(0.976911, 0.125697, 0, 1)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.8, 0, 0, 0, 1, 0, 0, 0, 0.2, 0, 1, -0.6)
+transform = Transform3D(0.8, 0, 0, 0, 1, 0, 0, 0, 0.2, 0, 1.16598, -0.6)
 mesh = SubResource("BoxMesh_os0ty")
 
 [connection signal="body_entered" from="DetectionRange" to="." method="_on_detection_range_body_entered"]

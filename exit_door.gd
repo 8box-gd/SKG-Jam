@@ -1,7 +1,9 @@
+@icon("res://icons/icon_door.svg")
 extends Node3D
 
 func _ready() -> void:
-	open_door()
+	#open_door()
+	pass
 
 func open_door():
 	var tween: Tween = get_tree().create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)

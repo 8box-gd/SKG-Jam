@@ -2,6 +2,7 @@
 extends Node3D
 
 @export var player: CharacterBody3D
+@export var exit_door: Node3D
 
 signal show_keypad
 signal hide_keypad
@@ -19,3 +20,6 @@ func _on_detection_range_body_exited(body: Node3D) -> void:
 		#hide_keypad.emit
 		#print("Keypad: Hide keypad")
 		player.leave_keypad()
+
+func open_door() -> void:
+	exit_door.open_door()
