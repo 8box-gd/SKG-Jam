@@ -25,7 +25,7 @@ func light_up() -> void:
 	
 	if not name in Carryovers.lit_torches:
 		Carryovers.lit_torches.append(name)
-		print("Torches found: ", Carryovers.lit_torches.size())
+		#print("Torches found: ", Carryovers.lit_torches.size())S
 
 func turn_off() -> void:
 	omni_light.visible = false

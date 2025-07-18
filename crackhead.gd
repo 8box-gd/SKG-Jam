@@ -4,7 +4,7 @@ extends CharacterBody3D
 enum {TRACKING, CHARGE, BONK, RUSH, KILL}
 @onready var hearing_cast: RayCast3D = %HearingCast
 @onready var charge_cast: RayCast3D = %ChargeCast
-@onready var hearing_range: Area3D = $HearingRange # If you're in this sphere, he can hear you
+@onready var hearing_range_shape: CollisionShape3D = $HearingRange/CollisionShape3D # For debug purposes
 @onready var last_pos_indicator: MeshInstance3D = $LastPosIndicator
 @onready var wallhack_cast: RayCast3D = %WallhackCast
 @onready var raycast_origin: Marker3D = $RaycastOrigin
@@ -21,10 +21,14 @@ signal get_patrol_points(me: CharacterBody3D)
 @export var points_contaner: Node3D
 @export var objective_container: Node3D
 @export_group("Movement")
+@export var hearing_range := 12.0 #[m] Radius
+@export var autocharge_range := 2.0 #[m] Also a radius
 @export var tracking_speed := 4.0
 @export var tracking_accel := 8.0
 @export var charge_speed := 20.0
 @export var charge_accel := 20.0
+@export var rush_speed := 8.0
+@export var rush_accel := 12.0
 @export var rotation_speed := 10.0
 @export var search_precision := 3.0 #[m]
 
@@ -34,6 +38,12 @@ var last_known_player_position := Vector3.ZERO
 var patrol_points: Array[Node]
 
 func _ready() -> void:
+	# Set hearing and autocharge ranges
+	hearing_cast.target_position.z = -hearing_range
+	wallhack_cast.target_position.z = -hearing_range
+	charge_cast.target_position.z = -autocharge_range
+	hearing_range_shape.get_shape().radius = hearing_range
+	
 	if player:
 		player.footstep.connect(on_player_footstep)
 		update_player_pos()
@@ -60,6 +70,7 @@ func _physics_process(delta: float) -> void:
 		TRACKING: tracking_state(delta)
 		CHARGE: charge_state(delta)
 		BONK: bonk_state(delta)
+		RUSH: rush_state(delta)
 		_: pass
 	
 	if state != BONK:
@@ -112,7 +123,9 @@ func on_player_footstep():
 				else: # No line of sight, track behind wall
 					update_player_pos()
 		RUSH:
-			state = TRACKING
+			if hearing_cast.is_colliding() and wallhack_cast.is_colliding():
+				state = TRACKING
+				print("Rush ended")
 		CHARGE: pass # Unaffected by footsteps
 		_: pass
 
@@ -137,3 +150,29 @@ func _on_charge_collision_body_entered(body: Node3D) -> void:
 	velocity = -velocity * 0.3
 	bonk_recovery_timer.start()
 	state = BONK
+
+# Identical to TRACKING but faster
+func rush_state(delta) -> void:
+	var nav_direction := Vector3.ZERO
+	
+	nav_direction = nav_agent.get_next_path_position() - global_position
+	nav_direction = nav_direction.normalized()
+	velocity = velocity.move_toward(nav_direction * rush_speed, rush_accel * delta)
+	move_and_slide()
+	
+	if global_position.distance_to(last_known_player_position) < search_precision:
+		find_patrol_point()
+	
+	if charge_cast.is_colliding(): # If you get too close, he auto-charges regardless of sneak
+		if charge_cast.get_collider().is_in_group("Player"):
+			update_player_pos()
+			move_dir = to_local(player.global_position + Vector3(0,1,0))
+			move_dir.y = 0.0
+			move_dir = move_dir.normalized()
+			state = CHARGE
+
+func trigger_rush() -> void:
+	if state == TRACKING:
+		update_player_pos()
+		state = RUSH
+		print("Rush started")

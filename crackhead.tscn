@@ -39,8 +39,9 @@ size = Vector3(0.665, 0.39, 0.215)
 [node name="Crackhead" type="CharacterBody3D"]
 collision_layer = 0
 script = ExtResource("1_0lnye")
-tracking_speed = 3.0
-tracking_accel = 6.0
+hearing_range = 24.0
+charge_speed = 22.0
+search_precision = 2.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -77,7 +78,6 @@ mesh = SubResource("SphereMesh_s13u0")
 
 [node name="RaycastOrigin" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-visible = false
 
 [node name="HearingCast" type="RayCast3D" parent="RaycastOrigin"]
 unique_name_in_owner = true
@@ -116,7 +116,6 @@ visible = false
 mesh = SubResource("BoxMesh_wj4b2")
 
 [node name="ChargeCooldown" type="Timer" parent="."]
-wait_time = 2.0
 one_shot = true
 
 [connection signal="timeout" from="BonkRecoveryTimer" to="." method="_on_bonk_recovery_timer_timeout"]

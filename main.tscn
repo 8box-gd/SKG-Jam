@@ -1663,8 +1663,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 40)
 [node name="PatrolPoint13" parent="PatrolContainer" instance=ExtResource("5_lquwl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, 11)
 
-[node name="ObjectivesContainer" type="Node3D" parent="."]
+[node name="ObjectivesContainer" type="Node3D" parent="." node_paths=PackedStringArray("crackhead")]
 script = ExtResource("19_82xsv")
+crackhead = NodePath("../Crackhead")
 
 [node name="Objective" parent="ObjectivesContainer" node_paths=PackedStringArray("player") instance=ExtResource("8_5vw27")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 0, -33)
