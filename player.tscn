@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dr4jhgs6v78ji"]
+[gd_scene load_steps=23 format=3 uid="uid://dr4jhgs6v78ji"]
 
 [ext_resource type="Script" uid="uid://ce7u0iwfxk5nx" path="res://player.gd" id="1_4flbx"]
 [ext_resource type="PackedScene" uid="uid://cln33xt0s42ur" path="res://Blender/journalist_model_scene.tscn" id="2_onrkg"]
@@ -7,9 +7,11 @@
 [ext_resource type="AnimationLibrary" uid="uid://wjykbpo1103j" path="res://Blender/Mixamo/GetUp.res" id="5_dw050"]
 [ext_resource type="AnimationLibrary" uid="uid://bt4euvetdfvgd" path="res://Blender/Mixamo/Idle.res" id="6_b26j0"]
 [ext_resource type="PackedScene" uid="uid://brf3lhrlvfhw4" path="res://keypad_ui.tscn" id="7_1jxqw"]
+[ext_resource type="AnimationLibrary" uid="uid://c5ivmnvt88lhp" path="res://Blender/Mixamo/NewDeath.res" id="7_dw050"]
+[ext_resource type="FontFile" uid="uid://clkkpche2sgry" path="res://fonts/Atlantistextregular-qZv0.ttf" id="9_b26j0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
-radius = 0.45
+radius = 0.4
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4flbx"]
 albedo_color = Color(0.406666, 0.11, 1, 1)
@@ -1542,7 +1544,8 @@ _data = {
 font_size = 70
 
 [sub_resource type="LabelSettings" id="LabelSettings_1jxqw"]
-font_size = 36
+font = ExtResource("9_b26j0")
+font_size = 32
 
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
 collision_layer = 3
@@ -1613,15 +1616,15 @@ libraries = {
 &"FallFlat": ExtResource("4_1jxqw"),
 &"GetUp": ExtResource("5_dw050"),
 &"Idle": ExtResource("6_b26j0"),
+&"NewDeath": ExtResource("7_dw050"),
 &"SneakWalk": SubResource("AnimationLibrary_n7ghd"),
 &"run-anim": SubResource("AnimationLibrary_nvl01")
 }
 autoplay = "run-anim/mixamo_com"
 
 [node name="LifeTimer" type="Timer" parent="."]
-wait_time = 20.0
+wait_time = 60.0
 one_shot = true
-autostart = true
 
 [node name="TimeLabel" type="Label" parent="."]
 offset_left = 8.0
@@ -1637,7 +1640,6 @@ offset_left = 8.0
 offset_top = 83.0
 offset_right = 81.0
 offset_bottom = 106.0
-text = "[Nothing]"
 label_settings = SubResource("LabelSettings_1jxqw")
 
 [connection signal="timeout" from="LifeTimer" to="." method="_on_life_timer_timeout"]

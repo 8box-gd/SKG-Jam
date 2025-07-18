@@ -1,7 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://bpkp86jm2uqxp"]
+[gd_scene load_steps=24 format=3 uid="uid://bpkp86jm2uqxp"]
 
 [ext_resource type="Script" uid="uid://gxbrnlxu5o5p" path="res://crackhead.gd" id="1_0lnye"]
 [ext_resource type="Texture2D" uid="uid://b6sslg7vb0hx8" path="res://icons/icon_skull.svg" id="2_4ph3p"]
+[ext_resource type="Shader" uid="uid://ct5nsfa651d2d" path="res://particles/cracksmoke.tres" id="3_wj4b2"]
+[ext_resource type="Texture2D" uid="uid://balxmnwqlcvwl" path="res://particles/SmokeNoise.png" id="4_0rifg"]
+[ext_resource type="ArrayMesh" uid="uid://6a81bswkc08u" path="res://particles/Smonk.obj" id="4_6hvcd"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_w651x"]
 radius = 0.45
@@ -27,7 +30,7 @@ material = SubResource("StandardMaterial3D_4ph3p")
 radius = 0.4
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0lnye"]
-size = Vector3(0.85, 0.7, 0.601)
+size = Vector3(0.7, 0.7, 0.399902)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s13u0"]
 albedo_color = Color(4.71681e-06, 0.994074, 0.000182512, 1)
@@ -36,32 +39,82 @@ albedo_color = Color(4.71681e-06, 0.994074, 0.000182512, 1)
 material = SubResource("StandardMaterial3D_s13u0")
 size = Vector3(0.665, 0.39, 0.215)
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6hvcd"]
+noise_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0rifg"]
+seamless = true
+noise = SubResource("FastNoiseLite_6hvcd")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0rifg"]
+render_priority = 0
+shader = ExtResource("3_wj4b2")
+shader_parameter/Albedo = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/SmokeNoise = ExtResource("4_0rifg")
+shader_parameter/TextureScale = Vector2(1, 1)
+shader_parameter/DissolverTexture = SubResource("NoiseTexture2D_0rifg")
+
+[sub_resource type="Curve" id="Curve_evwte"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.400966, 0.561798), 1.40111, 0.731515, 1, 1, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_tte4u"]
+texture_mode = 1
+curve = SubResource("Curve_evwte")
+
+[sub_resource type="Curve" id="Curve_260kc"]
+_data = [Vector2(0, 0.898876), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_evwte"]
+curve = SubResource("Curve_260kc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tte4u"]
+particle_flag_rotate_y = true
+emission_shape = 1
+emission_sphere_radius = 0.2
+angle_min = -180.0
+angle_max = 180.0
+direction = Vector3(0, 1, 0)
+spread = 5.0
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.4
+scale_max = 0.6
+scale_curve = SubResource("CurveTexture_evwte")
+alpha_curve = SubResource("CurveTexture_tte4u")
+
 [node name="Crackhead" type="CharacterBody3D"]
 collision_layer = 0
 script = ExtResource("1_0lnye")
 hearing_range = 24.0
 charge_speed = 22.0
+rush_speed = 12.0
+rush_accel = 30.0
 search_precision = 2.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_w651x")
 
+[node name="ThruTheWalls" type="Sprite3D" parent="."]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 1.46137, 0)
+visible = false
+billboard = 1
+no_depth_test = true
+texture_filter = 0
+texture = ExtResource("2_4ph3p")
+
 [node name="DebugCap" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
 mesh = SubResource("CapsuleMesh_4ph3p")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="DebugCap"]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.4, -0.6)
 visible = false
 mesh = SubResource("BoxMesh_w651x")
-
-[node name="ThruTheWalls" type="Sprite3D" parent="DebugCap"]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0.461367, 0)
-billboard = 1
-no_depth_test = true
-texture_filter = 0
-texture = ExtResource("2_4ph3p")
 
 [node name="HearingRange" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -78,6 +131,7 @@ mesh = SubResource("SphereMesh_s13u0")
 
 [node name="RaycastOrigin" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
 
 [node name="HearingCast" type="RayCast3D" parent="RaycastOrigin"]
 unique_name_in_owner = true
@@ -98,7 +152,6 @@ collision_mask = 2
 debug_enabled = true
 
 [node name="BonkRecoveryTimer" type="Timer" parent="."]
-wait_time = 2.0
 one_shot = true
 
 [node name="ChargeCollision" type="Area3D" parent="."]
@@ -106,7 +159,7 @@ collision_layer = 0
 collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ChargeCollision"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.499652)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.399103)
 shape = SubResource("BoxShape3D_0lnye")
 debug_color = Color(1, 0.0229599, 0.0851782, 1)
 
@@ -117,6 +170,13 @@ mesh = SubResource("BoxMesh_wj4b2")
 
 [node name="ChargeCooldown" type="Timer" parent="."]
 one_shot = true
+
+[node name="SmokeParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = SubResource("ShaderMaterial_0rifg")
+amount = 12
+process_material = SubResource("ParticleProcessMaterial_tte4u")
+draw_pass_1 = ExtResource("4_6hvcd")
 
 [connection signal="timeout" from="BonkRecoveryTimer" to="." method="_on_bonk_recovery_timer_timeout"]
 [connection signal="body_entered" from="ChargeCollision" to="." method="_on_charge_collision_body_entered"]

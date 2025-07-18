@@ -54,6 +54,9 @@ func _ready() -> void:
 		print("Crackhead: Patrol points not found")
 	
 	# Spawn at random objective
+	# Wait to teleport in, to allow player wakeup animation to pass
+	# When not debugging, move Crackhead outside of the map
+	await get_tree().create_timer(3.0).timeout
 	global_position = objective_container.get_children().pick_random().global_position
 
 func _physics_process(delta: float) -> void:

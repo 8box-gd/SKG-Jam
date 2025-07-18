@@ -28,7 +28,7 @@ var _cam_input_direction := Vector2.ZERO
 var _last_movement_direction := Vector3.FORWARD
 var sneaking := false
 var current_speed := 8.0
-var has_control := true # Will be set to False when finished. Left True for debug
+var has_control := false # Will be set to False when finished. Left True for debug
 var dead := false
 
 func _ready() -> void:
@@ -39,7 +39,9 @@ func _ready() -> void:
 	# WAKE UP JEFF
 	anim_player.play("GetUp/mixamo_com")
 	await anim_player.animation_finished
-	if not dead: has_control = true
+	if not dead:
+		has_control = true
+		life_timer.start()
 	
 	
 
@@ -119,7 +121,7 @@ func die() -> void:
 	dead = true
 	velocity = Vector3.ZERO
 	has_control = false
-	anim_player.play("FallFlat/mixamo_com")
+	anim_player.play("NewDeath/mixamo_com")
 	await anim_player.animation_finished
 	ded.emit()
 

@@ -1,11 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://dff0jtrv1m5rh"]
+[gd_scene load_steps=8 format=3 uid="uid://dff0jtrv1m5rh"]
 
 [ext_resource type="Script" uid="uid://ntcw2pwwvl6h" path="res://keypad.gd" id="1_0sp1t"]
+[ext_resource type="Texture2D" uid="uid://cvqtoc0cihibq" path="res://textures/world/Keypad.png" id="2_4swqm"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_os0ty"]
-size = Vector3(2, 1, 2)
+size = Vector3(2, 1, 2.46924)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4swqm"]
+albedo_color = Color(0.215686, 0.137255, 0.137255, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_os0ty"]
+material = SubResource("StandardMaterial3D_4swqm")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w41gr"]
+transparency = 1
+albedo_texture = ExtResource("2_4swqm")
+texture_filter = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_8rcbr"]
+material = SubResource("StandardMaterial3D_w41gr")
+size = Vector2(0.825, 1.385)
 
 [node name="Keypad" type="Node3D"]
 script = ExtResource("1_0sp1t")
@@ -14,13 +28,17 @@ script = ExtResource("1_0sp1t")
 collision_layer = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionRange"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.551352, 0.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.551352, 0.734619)
 shape = SubResource("BoxShape3D_os0ty")
 debug_color = Color(0.976911, 0.125697, 0, 1)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.8, 0, 0, 0, 1, 0, 0, 0, 0.2, 0, 1.16598, -0.6)
+transform = Transform3D(0.8, 0, 0, 0, 1.09, 0, 0, 0, 0.2, 0, 1.38437, -0.6)
 mesh = SubResource("BoxMesh_os0ty")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0129991, 1.28147, -0.491814)
+mesh = SubResource("QuadMesh_8rcbr")
 
 [connection signal="body_entered" from="DetectionRange" to="." method="_on_detection_range_body_entered"]
 [connection signal="body_exited" from="DetectionRange" to="." method="_on_detection_range_body_exited"]
