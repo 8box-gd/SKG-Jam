@@ -7,6 +7,7 @@ extends Node3D
 @onready var player: Player = $Player
 @onready var exit_door: Node3D = $ExitDoor
 @onready var end_light: OmniLight3D = $EndingTrigger/EndLight
+@onready var end_light_sound: AudioStreamPlayer3D = $EndingTrigger/EndLightSound
 
 var reached_ending := false
 
@@ -35,3 +36,4 @@ func start_ending() -> void:
 	crackhead.queue_free()
 	await get_tree().create_timer(1.0).timeout
 	end_light.visible = true
+	end_light_sound.play()

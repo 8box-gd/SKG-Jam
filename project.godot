@@ -22,10 +22,6 @@ config/icon="res://icon.svg"
 Carryovers="*res://carryovers.gd"
 FadeTransition="*res://fade_transition.tscn"
 
-[debug]
-
-settings/stdout/verbose_stdout=true
-
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/func_godot/plugin.cfg")

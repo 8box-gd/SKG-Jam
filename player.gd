@@ -11,6 +11,8 @@ class_name Player extends CharacterBody3D
 @onready var keypad_ui: Node2D = $KeypadUI
 @onready var objective_label: Label = $ObjectiveLabel
 
+@onready var footstep_sound: AudioStreamPlayer3D = $Footsteps
+
 signal footstep
 signal ded
 
@@ -28,7 +30,7 @@ var _cam_input_direction := Vector2.ZERO
 var _last_movement_direction := Vector3.FORWARD
 var sneaking := false
 var current_speed := 8.0
-var has_control := false # Will be set to False when finished. Left True for debug
+var has_control := true # Will be set to False when finished. Left True for debug
 var dead := false
 
 func _ready() -> void:
@@ -100,6 +102,7 @@ func _physics_process(delta: float) -> void:
 	# Footstep handling
 	if raw_input != Vector2.ZERO and step_timer.time_left == 0.0 and not sneaking:
 		footstep.emit()
+		footstep_sound.play()
 		step_timer.start()
 	
 	if has_control: handle_animations()

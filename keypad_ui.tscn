@@ -1,10 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://brf3lhrlvfhw4"]
+[gd_scene load_steps=11 format=3 uid="uid://brf3lhrlvfhw4"]
 
 [ext_resource type="Script" uid="uid://blgj2uyjqwdth" path="res://keypad_ui.gd" id="1_j2e88"]
 [ext_resource type="Texture2D" uid="uid://cvqtoc0cihibq" path="res://textures/world/Keypad.png" id="2_j2e88"]
 [ext_resource type="FontFile" uid="uid://clkkpche2sgry" path="res://fonts/Atlantistextregular-qZv0.ttf" id="3_lysnd"]
 [ext_resource type="FontFile" uid="uid://bgmjid013gbqo" path="res://fonts/Atlantistextcaps-ALnm.ttf" id="4_8tycp"]
 [ext_resource type="FontFile" uid="uid://j7k6mr6uhwn" path="res://fonts/Atlantistextbold-DOr0.ttf" id="4_hpdna"]
+[ext_resource type="AudioStream" uid="uid://7bwph8hui13k" path="res://sounds/KeypadBeep.wav" id="6_hpdna"]
+[ext_resource type="AudioStream" uid="uid://c7nicbuhdkj6w" path="res://sounds/KeypadWrong.wav" id="7_hn8m0"]
+[ext_resource type="AudioStream" uid="uid://cfbf7g88v33e5" path="res://sounds/KeypadRight.wav" id="8_x475k"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_kckd0"]
 font = ExtResource("3_lysnd")
@@ -49,3 +52,15 @@ offset_right = 1124.0
 offset_bottom = 499.0
 text = "(use the number keys)"
 label_settings = SubResource("LabelSettings_j2e88")
+
+[node name="Beep" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(558, 316)
+stream = ExtResource("6_hpdna")
+
+[node name="Wrong" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(558, 316)
+stream = ExtResource("7_hn8m0")
+
+[node name="Right" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(558, 316)
+stream = ExtResource("8_x475k")

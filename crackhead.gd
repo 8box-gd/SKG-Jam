@@ -13,8 +13,10 @@ enum {TRACKING, CHARGE, BONK, RUSH, KILL}
 @onready var debug_cap: MeshInstance3D = $DebugCap
 @onready var charge_collision: Area3D = $ChargeCollision
 @onready var charge_cooldown: Timer = $ChargeCooldown
+@onready var whispers_sound: AudioStreamPlayer3D = $Whispers
+@onready var charge_sound: AudioStreamPlayer3D = $Charge
 
-signal get_patrol_points(me: CharacterBody3D)
+#signal get_patrol_points(me: CharacterBody3D)
 
 @export_group("Siblings")
 @export var player: CharacterBody3D
@@ -36,6 +38,7 @@ var move_dir := Vector3.FORWARD
 var state := TRACKING
 var last_known_player_position := Vector3.ZERO
 var patrol_points: Array[Node]
+var player_dead := false
 
 func _ready() -> void:
 	# Set hearing and autocharge ranges
@@ -43,6 +46,7 @@ func _ready() -> void:
 	wallhack_cast.target_position.z = -hearing_range
 	charge_cast.target_position.z = -autocharge_range
 	hearing_range_shape.get_shape().radius = hearing_range
+	whispers_sound.max_distance = hearing_range
 	
 	if player:
 		player.footstep.connect(on_player_footstep)
@@ -97,6 +101,7 @@ func tracking_state(delta: float) -> void:
 			move_dir = to_local(player.global_position + Vector3(0,1,0))
 			move_dir.y = 0.0
 			move_dir = move_dir.normalized()
+			if not player_dead: charge_sound.play()
 			state = CHARGE
 
 func charge_state(delta: float) -> void:
@@ -122,6 +127,7 @@ func on_player_footstep():
 					update_player_pos()
 					move_dir = to_local(player.global_position)
 					move_dir = move_dir.normalized()
+					if not player_dead: charge_sound.play()
 					state = CHARGE
 				else: # No line of sight, track behind wall
 					update_player_pos()
@@ -149,9 +155,11 @@ func _on_charge_collision_body_entered(body: Node3D) -> void:
 	if state != CHARGE: return
 	if body.is_in_group("Player"):
 		player.die()
+		player_dead = true
 		return
 	velocity = -velocity * 0.3
 	bonk_recovery_timer.start()
+	charge_sound.stop()
 	state = BONK
 
 # Identical to TRACKING but faster
@@ -172,6 +180,7 @@ func rush_state(delta) -> void:
 			move_dir = to_local(player.global_position + Vector3(0,1,0))
 			move_dir.y = 0.0
 			move_dir = move_dir.normalized()
+			if not player_dead: charge_sound.play()
 			state = CHARGE
 
 func trigger_rush() -> void:

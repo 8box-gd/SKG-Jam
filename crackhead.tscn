@@ -1,10 +1,12 @@
-[gd_scene load_steps=24 format=3 uid="uid://bpkp86jm2uqxp"]
+[gd_scene load_steps=26 format=3 uid="uid://bpkp86jm2uqxp"]
 
 [ext_resource type="Script" uid="uid://gxbrnlxu5o5p" path="res://crackhead.gd" id="1_0lnye"]
 [ext_resource type="Texture2D" uid="uid://b6sslg7vb0hx8" path="res://icons/icon_skull.svg" id="2_4ph3p"]
 [ext_resource type="Shader" uid="uid://ct5nsfa651d2d" path="res://particles/cracksmoke.tres" id="3_wj4b2"]
 [ext_resource type="Texture2D" uid="uid://balxmnwqlcvwl" path="res://particles/SmokeNoise.png" id="4_0rifg"]
 [ext_resource type="ArrayMesh" uid="uid://6a81bswkc08u" path="res://particles/Smonk.obj" id="4_6hvcd"]
+[ext_resource type="AudioStream" uid="uid://dua6y30j4y85m" path="res://sounds/588669__thepig01__whispers.mp3" id="6_0rifg"]
+[ext_resource type="AudioStream" uid="uid://bgwebrlprkq1x" path="res://sounds/charge.wav" id="7_260kc"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_w651x"]
 radius = 0.45
@@ -177,6 +179,18 @@ material_override = SubResource("ShaderMaterial_0rifg")
 amount = 12
 process_material = SubResource("ParticleProcessMaterial_tte4u")
 draw_pass_1 = ExtResource("4_6hvcd")
+
+[node name="Whispers" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+stream = ExtResource("6_0rifg")
+attenuation_model = 3
+unit_size = 100.0
+autoplay = true
+
+[node name="Charge" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+stream = ExtResource("7_260kc")
+volume_db = -12.0
 
 [connection signal="timeout" from="BonkRecoveryTimer" to="." method="_on_bonk_recovery_timer_timeout"]
 [connection signal="body_entered" from="ChargeCollision" to="." method="_on_charge_collision_body_entered"]
