@@ -60,8 +60,9 @@ func _ready() -> void:
 	# Spawn at random objective
 	# Wait to teleport in, to allow player wakeup animation to pass
 	# When not debugging, move Crackhead outside of the map
-	await get_tree().create_timer(3.0).timeout
+	await get_tree().create_timer(4.0).timeout
 	global_position = objective_container.get_children().pick_random().global_position
+	update_player_pos()
 
 func _physics_process(delta: float) -> void:
 	if player:
@@ -156,6 +157,7 @@ func _on_charge_collision_body_entered(body: Node3D) -> void:
 	if body.is_in_group("Player"):
 		player.die()
 		player_dead = true
+		charge_sound.stop()
 		return
 	velocity = -velocity * 0.3
 	bonk_recovery_timer.start()

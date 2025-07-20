@@ -129,6 +129,7 @@ debug_color = Color(0.985947, 0, 0.328636, 0.42)
 
 [node name="LastPosIndicator" type="MeshInstance3D" parent="."]
 top_level = true
+visible = false
 mesh = SubResource("SphereMesh_s13u0")
 
 [node name="RaycastOrigin" type="Marker3D" parent="."]

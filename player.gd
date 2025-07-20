@@ -7,12 +7,16 @@ class_name Player extends CharacterBody3D
 @onready var model: Node3D = %JournalistModel
 @onready var anim_player: AnimationPlayer = $JournalistModel/GameRig/AnimationPlayer
 @onready var life_timer: Timer = $LifeTimer
-@onready var time_label: Label = $TimeLabel
-@onready var keypad_ui: Node2D = $KeypadUI
-@onready var objective_label: Label = $ObjectiveLabel
+@onready var time_label: Label = %TimeLabel
+@onready var keypad_ui: Node2D = %KeypadUI
+@onready var objective_label: Label = %ObjectiveLabel
+@onready var ten_second_warning: Timer = $"10SecondWarning"
+@onready var vignette_rect: ColorRect = $CanvasLayer/VignetteRect
+@onready var secondary_anim: AnimationPlayer = $SecondaryAnim
 
 @onready var footstep_sound: AudioStreamPlayer3D = $Footsteps
 @onready var death_sound: AudioStreamPlayer3D = $Death
+@onready var heartbeat_sound: AudioStreamPlayer3D = $Heartbeat
 
 signal footstep
 signal ded
@@ -26,25 +30,30 @@ signal ded
 @export var acceleration := 20.0
 @export var rotation_speed := 12.0
 @export var stopping_speed := 1.0
+@export_range(1.0, 120.0, 0.1, "suffix:s") var life_time := 20.0 #[s]
 
 var _cam_input_direction := Vector2.ZERO
 var _last_movement_direction := Vector3.FORWARD
 var sneaking := false
 var current_speed := 8.0
-var has_control := true # Will be set to False when finished. Left True for debug
+var has_control := false # Will be set to False when finished. Left True for debug
 var dead := false
 
 func _ready() -> void:
+	life_timer.wait_time = life_time
+	ten_second_warning.wait_time = life_time - 10.0
 	current_speed = move_speed
+	#vignette_rect.material.set_shader_parameter("vignette_strength", 0.5)
 	if Carryovers.found_keypad or Carryovers.objectives_found > 0:
 		update_objective()
 	
 	# WAKE UP JEFF
-	anim_player.play("GetUp/mixamo_com")
+	anim_player.play("GetUp/mixamo_com", -1, 1.1)
 	await anim_player.animation_finished
 	if not dead:
 		has_control = true
 		life_timer.start()
+		ten_second_warning.start()
 	
 	
 
@@ -126,6 +135,7 @@ func die() -> void:
 	velocity = Vector3.ZERO
 	has_control = false
 	anim_player.play("NewDeath/mixamo_com")
+	heartbeat_sound.stop()
 	death_sound.play()
 	await anim_player.animation_finished
 	ded.emit()
@@ -155,3 +165,13 @@ func update_objective() -> void:
 		objective_label.text = "Digits found: " + str(Carryovers.objectives_found) + "/6"
 	else: 
 		objective_label.text = "Digits found: " + str(Carryovers.objectives_found)
+
+func _on_second_warning_timeout() -> void:
+	heartbeat_sound.play()
+	tween_vignette()
+
+func tween_vignette() -> void:
+	secondary_anim.play("VignetteFadeIn")
+	#var vintween := Tween.new().set_trans(Tween.TRANS_LINEAR)
+	#vintween.tween_property(vignette_rect, "material:shader_parameter/vignette_strength", 1.0, 10.0)
+	#vintween.tween_method(func(val:float): vignette_rect.material.set_shader_parameter("vignette_strength", val), 0.0, 1.0, 10.0)
