@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://brf3lhrlvfhw4"]
+[gd_scene load_steps=12 format=3 uid="uid://brf3lhrlvfhw4"]
 
 [ext_resource type="Script" uid="uid://blgj2uyjqwdth" path="res://keypad_ui.gd" id="1_j2e88"]
 [ext_resource type="Texture2D" uid="uid://cvqtoc0cihibq" path="res://textures/world/Keypad.png" id="2_j2e88"]
@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://7bwph8hui13k" path="res://sounds/KeypadBeep.wav" id="6_hpdna"]
 [ext_resource type="AudioStream" uid="uid://c7nicbuhdkj6w" path="res://sounds/KeypadWrong.wav" id="7_hn8m0"]
 [ext_resource type="AudioStream" uid="uid://cfbf7g88v33e5" path="res://sounds/KeypadRight.wav" id="8_x475k"]
+[ext_resource type="FontFile" uid="uid://bm8tgrodrh0y0" path="res://fonts/Atlantisheadbold-p7KZ.ttf" id="9_h03ng"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_kckd0"]
 font = ExtResource("3_lysnd")
@@ -64,3 +65,19 @@ stream = ExtResource("7_hn8m0")
 [node name="Right" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(558, 316)
 stream = ExtResource("8_x475k")
+
+[node name="EasterEgg" type="RichTextLabel" parent="."]
+visible = false
+offset_left = 13.0
+offset_top = 101.0
+offset_right = 589.0
+offset_bottom = 536.0
+theme_override_fonts/normal_font = ExtResource("9_h03ng")
+bbcode_enabled = true
+text = "[font_size=50][rainbow freq=0.2 sat=1 val=1][wave amp=50 freq=2]MALDAVIUS
+FIGTREE
+IS A GAY
+RETARDED
+NEPOBABY"
+horizontal_alignment = 1
+vertical_alignment = 1

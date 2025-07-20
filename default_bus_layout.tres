@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=2 format=3 uid="uid://csg4jodpw7hxl"]
+[gd_resource type="AudioBusLayout" load_steps=3 format=3 uid="uid://csg4jodpw7hxl"]
 
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_j3pel"]
 resource_name = "Reverb"
@@ -6,6 +6,10 @@ room_size = 0.3
 damping = 0.18
 spread = 0.8
 wet = 0.3
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_g28q7"]
+resource_name = "Reverb"
+room_size = 0.6
 
 [resource]
 bus/1/name = &"Footstep"
@@ -16,3 +20,11 @@ bus/1/volume_db = 0.0
 bus/1/send = &"Master"
 bus/1/effect/0/effect = SubResource("AudioEffectReverb_j3pel")
 bus/1/effect/0/enabled = true
+bus/2/name = &"Typewriter"
+bus/2/solo = false
+bus/2/mute = false
+bus/2/bypass_fx = false
+bus/2/volume_db = 0.0
+bus/2/send = &"Master"
+bus/2/effect/0/effect = SubResource("AudioEffectReverb_g28q7")
+bus/2/effect/0/enabled = true

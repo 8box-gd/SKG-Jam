@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://caixhgpc4hxtn"]
+
+[ext_resource type="Texture2D" uid="uid://nemjype34vs8" path="res://textures/world/TilesCeramicHerringbone002_AO_2K.jpg" id="1_khoa5"]
+
+[resource]
+albedo_texture = ExtResource("1_khoa5")
+metallic_specular = 0.0
+texture_filter = 2

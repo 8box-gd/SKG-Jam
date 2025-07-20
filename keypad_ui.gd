@@ -7,6 +7,7 @@ extends Node2D
 @onready var beep_sound: AudioStreamPlayer2D = $Beep
 @onready var wrong_sound: AudioStreamPlayer2D = $Wrong
 @onready var right_sound: AudioStreamPlayer2D = $Right
+@onready var easter_egg: RichTextLabel = $EasterEgg
 signal keypad_solved
 
 var displayed_numbers := ""
@@ -100,8 +101,19 @@ func code_correct() -> void:
 	keypad_solved.emit()
 
 func code_incorrect() -> void:
+	# Easter egg will only trigger if it is NOT the randomly chosen code.
+	# There is a 1 in 1 million chance for this
+	# Chosen code: Rescue has had 70 total ferrets
+	if displayed_numbers == "707070":
+		show_easteregg()
+	
 	print("Code incorrect.")
 	wrong_sound.play()
 	input_label.label_settings.font_color = Color(1,0,0)
 	await get_tree().create_timer(1.0).timeout
 	reset_keypad()
+
+func show_easteregg():
+	easter_egg.visible = true
+	await get_tree().create_timer(5.0).timeout
+	easter_egg.visible = false

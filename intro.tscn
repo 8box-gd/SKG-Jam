@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3 uid="uid://b2fn0vuyfvsmh"]
+
+[ext_resource type="Script" uid="uid://cl5vfgq03s8qx" path="res://intro.gd" id="1_ayt76"]
+[ext_resource type="FontFile" uid="uid://bgmjid013gbqo" path="res://fonts/Atlantistextcaps-ALnm.ttf" id="2_7a8ye"]
+[ext_resource type="AudioStream" uid="uid://d3v8t5jtu8ke6" path="res://sounds/typewriter.wav" id="3_7a8ye"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0a7ni"]
+font = ExtResource("2_7a8ye")
+font_size = 64
+
+[node name="Intro" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ayt76")
+hangtime = 3.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_0a7ni")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Typewriter" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(582, 286)
+stream = ExtResource("3_7a8ye")
+bus = &"Typewriter"
+
+[node name="KeyWaitTime" type="Timer" parent="."]
+wait_time = 0.03
+one_shot = true
+ignore_time_scale = true

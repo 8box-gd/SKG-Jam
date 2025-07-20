@@ -13,6 +13,7 @@ class_name Player extends CharacterBody3D
 @onready var ten_second_warning: Timer = $"10SecondWarning"
 @onready var vignette_rect: ColorRect = $CanvasLayer/VignetteRect
 @onready var secondary_anim: AnimationPlayer = $SecondaryAnim
+@onready var outro_label: Label = %OutroLabel
 
 @onready var footstep_sound: AudioStreamPlayer3D = $Footsteps
 @onready var death_sound: AudioStreamPlayer3D = $Death
@@ -20,6 +21,7 @@ class_name Player extends CharacterBody3D
 
 signal footstep
 signal ded
+signal to_credits
 
 @export_group("Params")
 @export_range(0.0, 1.0) var mouse_sensitivity := 0.25
@@ -54,6 +56,7 @@ func _ready() -> void:
 		has_control = true
 		life_timer.start()
 		ten_second_warning.start()
+		secondary_anim.play("VignetteFadeIn")
 	
 	
 
@@ -168,10 +171,19 @@ func update_objective() -> void:
 
 func _on_second_warning_timeout() -> void:
 	heartbeat_sound.play()
-	tween_vignette()
+	#tween_vignette()
 
 func tween_vignette() -> void:
-	secondary_anim.play("VignetteFadeIn")
+	#secondary_anim.play("VignetteFadeIn")
+	pass
 	#var vintween := Tween.new().set_trans(Tween.TRANS_LINEAR)
 	#vintween.tween_property(vignette_rect, "material:shader_parameter/vignette_strength", 1.0, 10.0)
 	#vintween.tween_method(func(val:float): vignette_rect.material.set_shader_parameter("vignette_strength", val), 0.0, 1.0, 10.0)
+
+func ending_text() -> void:
+	await  get_tree().create_timer(1.0).timeout
+	outro_label.start_scene()
+
+
+func _on_outro_label_go_to_credits() -> void:
+	to_credits.emit()

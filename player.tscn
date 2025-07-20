@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://dr4jhgs6v78ji"]
+[gd_scene load_steps=39 format=3 uid="uid://dr4jhgs6v78ji"]
 
 [ext_resource type="Script" uid="uid://ce7u0iwfxk5nx" path="res://player.gd" id="1_4flbx"]
 [ext_resource type="PackedScene" uid="uid://cln33xt0s42ur" path="res://Blender/journalist_model_scene.tscn" id="2_onrkg"]
@@ -11,8 +11,11 @@
 [ext_resource type="Shader" uid="uid://nvufx56pjffo" path="res://vignette.gdshader" id="8_u1c27"]
 [ext_resource type="FontFile" uid="uid://clkkpche2sgry" path="res://fonts/Atlantistextregular-qZv0.ttf" id="9_b26j0"]
 [ext_resource type="AudioStream" uid="uid://0kh7hneul80s" path="res://sounds/Step1.wav" id="10_ivps1"]
+[ext_resource type="FontFile" uid="uid://j7k6mr6uhwn" path="res://fonts/Atlantistextbold-DOr0.ttf" id="11_pylmc"]
+[ext_resource type="Script" uid="uid://cmttj52exh8uf" path="res://outro_label.gd" id="11_q13i1"]
 [ext_resource type="AudioStream" uid="uid://bwt0d7jlfqrw6" path="res://sounds/Step2.wav" id="11_urp6f"]
 [ext_resource type="AudioStream" uid="uid://bcsbgqaf6dbc2" path="res://sounds/Step3.wav" id="12_bwjto"]
+[ext_resource type="AudioStream" uid="uid://d3v8t5jtu8ke6" path="res://sounds/typewriter.wav" id="12_pylmc"]
 [ext_resource type="AudioStream" uid="uid://drgk0fw5j3s1k" path="res://sounds/ambiance.ogg" id="13_606se"]
 [ext_resource type="AudioStream" uid="uid://bsb7ebdxy7qcb" path="res://sounds/death.wav" id="13_urp6f"]
 [ext_resource type="AudioStream" uid="uid://jsit52staiq" path="res://sounds/heartbeat.wav" id="14_bwjto"]
@@ -1562,6 +1565,10 @@ font_size = 70
 font = ExtResource("9_b26j0")
 font_size = 32
 
+[sub_resource type="LabelSettings" id="LabelSettings_pbfsw"]
+font = ExtResource("11_pylmc")
+font_size = 48
+
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_606se"]
 random_pitch = 1.01
 random_volume_offset_db = 0.2
@@ -1569,22 +1576,6 @@ streams_count = 3
 stream_0/stream = ExtResource("10_ivps1")
 stream_1/stream = ExtResource("11_urp6f")
 stream_2/stream = ExtResource("12_bwjto")
-
-[sub_resource type="Animation" id="Animation_u1c27"]
-resource_name = "VignetteFadeIn"
-length = 10.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/VignetteRect:material:shader_parameter/vignette_strength")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 10),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.5]
-}
 
 [sub_resource type="Animation" id="Animation_op7ga"]
 length = 0.001
@@ -1599,6 +1590,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_u1c27"]
+resource_name = "VignetteFadeIn"
+length = 25.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/VignetteRect:material:shader_parameter/vignette_strength")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.5]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_op7ga"]
@@ -1721,8 +1728,28 @@ offset_left = 8.0
 offset_top = 9.0
 offset_right = 128.0
 offset_bottom = 41.0
-text = "[Nothing]"
 label_settings = SubResource("LabelSettings_1jxqw")
+
+[node name="OutroLabel" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_top = 9.0
+offset_right = 1152.0
+offset_bottom = 225.0
+label_settings = SubResource("LabelSettings_pbfsw")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+script = ExtResource("11_q13i1")
+
+[node name="Typewriter" type="AudioStreamPlayer2D" parent="CanvasLayer/OutroLabel"]
+position = Vector2(582, 286)
+stream = ExtResource("12_pylmc")
+bus = &"Typewriter"
+
+[node name="KeyWaitTime" type="Timer" parent="CanvasLayer/OutroLabel"]
+wait_time = 0.05
+one_shot = true
+ignore_time_scale = true
 
 [node name="AudioListener3D" type="AudioListener3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
@@ -1751,9 +1778,11 @@ stream = ExtResource("14_bwjto")
 libraries = {
 &"": SubResource("AnimationLibrary_op7ga")
 }
+autoplay = "RESET"
 
 [connection signal="timeout" from="LifeTimer" to="." method="_on_life_timer_timeout"]
 [connection signal="timeout" from="10SecondWarning" to="." method="_on_second_warning_timeout"]
 [connection signal="keypad_solved" from="CanvasLayer/KeypadUI" to="." method="_on_keypad_ui_keypad_solved"]
+[connection signal="go_to_credits" from="CanvasLayer/OutroLabel" to="." method="_on_outro_label_go_to_credits"]
 
 [editable path="JournalistModel"]

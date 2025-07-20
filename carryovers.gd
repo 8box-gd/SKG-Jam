@@ -5,6 +5,7 @@ var objectives_found := 0
 var lit_torches: Array[String]
 var found_objectives_list: Array[String]
 var found_keypad := false
+var run_counter := 0 # Increments every time the main game scene is readied
 
 func _ready() -> void:
 	door_code = roll_door_code()

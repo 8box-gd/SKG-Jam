@@ -15,13 +15,14 @@ var patrol_points: Array[Node]
 
 func _ready() -> void:
 	FadeTransition.fade_from_black()
+	Carryovers.run_counter += 1
 
 func _on_crackhead_get_patrol_points(me: CharacterBody3D) -> void:
 	pass
 
 func _on_player_ded() -> void:
 	await FadeTransition.fade_to_black(0.8)
-	get_tree().reload_current_scene()
+	get_tree().change_scene_to_file("res://between_rounds.tscn")
 
 
 func _on_ending_trigger_body_entered(body: Node3D) -> void:
@@ -37,3 +38,8 @@ func start_ending() -> void:
 	await get_tree().create_timer(1.0).timeout
 	end_light.visible = true
 	end_light_sound.play()
+	player.ending_text()
+
+
+func _on_player_to_credits() -> void:
+	get_tree().change_scene_to_file("res://credits.tscn")

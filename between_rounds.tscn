@@ -1,0 +1,135 @@
+[gd_scene load_steps=11 format=3 uid="uid://bt32rq8ke2w1w"]
+
+[ext_resource type="Script" uid="uid://pbneumy43rv0" path="res://between_rounds.gd" id="1_fptek"]
+[ext_resource type="FontFile" uid="uid://bgmjid013gbqo" path="res://fonts/Atlantistextcaps-ALnm.ttf" id="1_qnlgg"]
+[ext_resource type="FontFile" uid="uid://clkkpche2sgry" path="res://fonts/Atlantistextregular-qZv0.ttf" id="2_yt18j"]
+[ext_resource type="AudioStream" uid="uid://d3v8t5jtu8ke6" path="res://sounds/typewriter.wav" id="4_ug7k7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fptek"]
+font = ExtResource("1_qnlgg")
+font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_ug7k7"]
+font = ExtResource("2_yt18j")
+font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_2ma81"]
+font = ExtResource("2_yt18j")
+font_size = 32
+
+[sub_resource type="Animation" id="Animation_ha0cb"]
+resource_name = "tip_fade"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TipLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_h23nv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TipLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3rm2m"]
+_data = {
+&"RESET": SubResource("Animation_h23nv"),
+&"tip_fade": SubResource("Animation_ha0cb")
+}
+
+[node name="BetweenRounds" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fptek")
+hangtime = 5.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CultistLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_right = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_fptek")
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="JournalistLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_right = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_ug7k7")
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="KeyWaitTime" type="Timer" parent="."]
+wait_time = 0.025
+one_shot = true
+ignore_time_scale = true
+
+[node name="TipLabel" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -451.0
+offset_top = -40.0
+offset_right = 451.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "TIP: Your life time is limited. If you hear a heartbeat, better hurry up."
+label_settings = SubResource("LabelSettings_2ma81")
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_3rm2m")
+}
+autoplay = "tip_fade"
+
+[node name="Typewriter" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(582, 286)
+stream = ExtResource("4_ug7k7")
+volume_db = -4.0
+bus = &"Typewriter"

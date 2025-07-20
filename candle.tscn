@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://b53sqkq1xdhyw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ipi1"]
+albedo_color = Color(0.93, 0.9083, 0.6696, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2ipi1"]
+material = SubResource("StandardMaterial3D_2ipi1")
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.2
+radial_segments = 10
+rings = 1
+cap_bottom = false
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tcgl6"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.747183, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_tcgl6"]
+material = SubResource("StandardMaterial3D_tcgl6")
+top_radius = 0.01
+bottom_radius = 0.02
+height = 0.05
+radial_segments = 5
+rings = 1
+
+[node name="Candle" type="Node3D"]
+
+[node name="Body" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+mesh = SubResource("CylinderMesh_2ipi1")
+
+[node name="Vlam" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.228495, 0)
+mesh = SubResource("CylinderMesh_tcgl6")

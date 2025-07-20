@@ -1,0 +1,92 @@
+[gd_scene load_steps=7 format=3 uid="uid://fm1ehts05qu6"]
+
+[ext_resource type="Script" uid="uid://dtjgeyrq3khgo" path="res://credits.gd" id="1_c1t8d"]
+[ext_resource type="FontFile" uid="uid://bm8tgrodrh0y0" path="res://fonts/Atlantisheadbold-p7KZ.ttf" id="1_nm7lk"]
+[ext_resource type="FontFile" uid="uid://clkkpche2sgry" path="res://fonts/Atlantistextregular-qZv0.ttf" id="3_pjc1l"]
+[ext_resource type="Texture2D" uid="uid://iqhfsu2o67ey" path="res://icons/8BOXtagBig.png" id="4_j6beo"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_c1t8d"]
+font = ExtResource("1_nm7lk")
+font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_4av4j"]
+font = ExtResource("3_pjc1l")
+font_size = 32
+
+[node name="Credits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_c1t8d")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
+
+[node name="TitleLabel" type="Label" parent="."]
+offset_top = 3.0
+offset_right = 276.0
+offset_bottom = 107.0
+text = "Credits"
+label_settings = SubResource("LabelSettings_c1t8d")
+horizontal_alignment = 1
+
+[node name="Label1" type="Label" parent="."]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 95.0
+offset_right = 473.0
+offset_bottom = 127.0
+text = "PROGRAMMING, ART,
+MODELLING, MAPPING
+
+
+
+
+SOUNDS
+Whispers - ThePig01 @ FreeSound
+Footsteps - CongusBongus @ OGA
+Page Flip - Voltiment555 @ OGA
+Ear Ringing - Hardance @ FS
+Heartbeat - loudernoises @ FS
+Ambiance - Hitrison @ FS
+Typewriter - fellwell5 @ FS"
+label_settings = SubResource("LabelSettings_4av4j")
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 522.0
+offset_top = 24.0
+offset_right = 1136.0
+offset_bottom = 511.0
+text = "VISUALS
+Textures - CAN OF TEXTURES @ Superhive
+3D Smoke Effect - Le Lu
+Vignette Shader - _DenisProdan_ @ GDShaders
+
+MAPPING TOOLS
+TrenchBroom
+func_godot
+
+TESTING
+[Name here]
+
+Made for the SKG Community Jam
+Thanks for playing!
+
+[ESC to exit]"
+label_settings = SubResource("LabelSettings_4av4j")
+
+[node name="8boXtagBig" type="Sprite2D" parent="."]
+modulate = Color(99, 99, 99, 1)
+position = Vector2(114, 198)
+texture = ExtResource("4_j6beo")
