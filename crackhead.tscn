@@ -90,7 +90,7 @@ alpha_curve = SubResource("CurveTexture_tte4u")
 [node name="Crackhead" type="CharacterBody3D"]
 collision_layer = 0
 script = ExtResource("1_0lnye")
-hearing_range = 24.0
+hearing_range = 22.0
 charge_speed = 22.0
 rush_speed = 12.0
 rush_accel = 30.0

@@ -12,6 +12,7 @@ class_name Player extends CharacterBody3D
 @onready var objective_label: Label = $ObjectiveLabel
 
 @onready var footstep_sound: AudioStreamPlayer3D = $Footsteps
+@onready var death_sound: AudioStreamPlayer3D = $Death
 
 signal footstep
 signal ded
@@ -125,6 +126,7 @@ func die() -> void:
 	velocity = Vector3.ZERO
 	has_control = false
 	anim_player.play("NewDeath/mixamo_com")
+	death_sound.play()
 	await anim_player.animation_finished
 	ded.emit()
 

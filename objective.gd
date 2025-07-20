@@ -1,5 +1,6 @@
 @icon("res://icons/icon_parchment.svg")
 extends Area3D
+@onready var page_flip: AudioStreamPlayer3D = $PageFlip
 
 signal objective_found
 
@@ -20,4 +21,7 @@ func find_objective() -> void:
 		objective_found.emit()
 		Carryovers.objectives_found += 1
 		player.update_objective()
+		visible = false
+		page_flip.play()
+		await page_flip.finished
 		queue_free()
