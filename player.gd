@@ -18,6 +18,7 @@ class_name Player extends CharacterBody3D
 @onready var footstep_sound: AudioStreamPlayer3D = $Footsteps
 @onready var death_sound: AudioStreamPlayer3D = $Death
 @onready var heartbeat_sound: AudioStreamPlayer3D = $Heartbeat
+@onready var ambiance: AudioStreamPlayer3D = $Ambiance
 
 signal footstep
 signal ded
@@ -181,6 +182,7 @@ func tween_vignette() -> void:
 	#vintween.tween_method(func(val:float): vignette_rect.material.set_shader_parameter("vignette_strength", val), 0.0, 1.0, 10.0)
 
 func ending_text() -> void:
+	ambiance.stop()
 	await  get_tree().create_timer(1.0).timeout
 	outro_label.start_scene()
 

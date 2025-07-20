@@ -61,7 +61,10 @@ func _ready() -> void:
 	# Wait to teleport in, to allow player wakeup animation to pass
 	# When not debugging, move Crackhead outside of the map
 	await get_tree().create_timer(4.0).timeout
-	global_position = objective_container.get_children().pick_random().global_position
+	if objective_container.get_children(): # Bandaid fix. May trap Mr. Smoke in the Backrooms.
+		global_position = objective_container.get_children().pick_random().global_position # THIS IS WHERE IT HAPPENS
+	else:
+		print("Objective Container not found")
 	update_player_pos()
 
 func _physics_process(delta: float) -> void:

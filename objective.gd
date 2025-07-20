@@ -8,7 +8,8 @@ signal objective_found
 
 func _ready() -> void:
 	if name in Carryovers.found_objectives_list:
-		queue_free()
+		visible = false
+		
 
 func _on_body_entered(body: Node3D) -> void:
 	if body.is_in_group("Player"):
@@ -23,5 +24,5 @@ func find_objective() -> void:
 		player.update_objective()
 		visible = false
 		page_flip.play()
-		await page_flip.finished
-		queue_free()
+		#await page_flip.finished
+		#queue_free()

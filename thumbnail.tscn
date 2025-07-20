@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://byrit0ghy4uf4"]
+
+[ext_resource type="Texture2D" uid="uid://rt1dchrv0s6" path="res://icons/NTMthumbnotext.png" id="1_qpapm"]
+[ext_resource type="FontFile" uid="uid://bm8tgrodrh0y0" path="res://fonts/Atlantisheadbold-p7KZ.ttf" id="2_i5wbl"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_xw14l"]
+font = ExtResource("2_i5wbl")
+font_size = 48
+
+[node name="Thumbnail" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 630.0
+offset_bottom = 500.0
+
+[node name="NtMthumbnotext" type="Sprite2D" parent="."]
+texture = ExtResource("1_qpapm")
+centered = false
+
+[node name="TitleLabel" type="Label" parent="."]
+offset_top = 18.0
+offset_right = 630.0
+offset_bottom = 177.0
+text = "NEW YORK
+MINUTE"
+label_settings = SubResource("LabelSettings_xw14l")
+horizontal_alignment = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(308, 250)
+zoom = Vector2(1.285, 1.285)

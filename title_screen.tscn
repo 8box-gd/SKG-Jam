@@ -1,11 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://dicrilqs5lcfq"]
+[gd_scene load_steps=9 format=3 uid="uid://dicrilqs5lcfq"]
 
 [ext_resource type="Script" uid="uid://biygph3h28nu4" path="res://title_screen.gd" id="1_ak2if"]
 [ext_resource type="FontFile" uid="uid://bm8tgrodrh0y0" path="res://fonts/Atlantisheadbold-p7KZ.ttf" id="1_v6p8y"]
+[ext_resource type="AudioStream" uid="uid://de1ojxkv2r33w" path="res://sounds/BookFlip1.wav" id="3_ig5kc"]
+[ext_resource type="FontFile" uid="uid://clkkpche2sgry" path="res://fonts/Atlantistextregular-qZv0.ttf" id="4_hafda"]
+[ext_resource type="FontFile" uid="uid://j7k6mr6uhwn" path="res://fonts/Atlantistextbold-DOr0.ttf" id="5_tpml5"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ak2if"]
 font = ExtResource("1_v6p8y")
 font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_jqemp"]
+font = ExtResource("4_hafda")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_013yr"]
+font = ExtResource("5_tpml5")
+font_size = 48
 
 [node name="TitleScreen" type="Control"]
 layout_mode = 3
@@ -27,9 +38,64 @@ color = Color(0, 0, 0, 1)
 
 [node name="TitleLabel" type="Label" parent="."]
 layout_mode = 0
-offset_top = 34.0
+offset_top = 38.0
 offset_right = 1152.0
-offset_bottom = 138.0
+offset_bottom = 142.0
 text = "NEW YORK MINUTE"
 label_settings = SubResource("LabelSettings_ak2if")
 horizontal_alignment = 1
+
+[node name="PageFlip" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(504, 362)
+stream = ExtResource("3_ig5kc")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 429.0
+offset_top = 178.0
+offset_right = 723.0
+offset_bottom = 315.0
+text = "Move - WASD/Arrows
+Look - Mouse
+Sneak - Left click/Shift
+Free Cursor - Esc"
+label_settings = SubResource("LabelSettings_jqemp")
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 0
+offset_left = 429.0
+offset_top = 519.0
+offset_right = 723.0
+offset_bottom = 656.0
+text = "Credits"
+label_settings = SubResource("LabelSettings_jqemp")
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 346.0
+offset_top = 433.0
+offset_right = 808.0
+offset_bottom = 570.0
+text = "- Click here to begin -"
+label_settings = SubResource("LabelSettings_013yr")
+
+[node name="StartButton" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 338.0
+offset_top = 433.0
+offset_right = 819.0
+offset_bottom = 483.0
+
+[node name="CreditsButton" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 520.0
+offset_top = 513.0
+offset_right = 634.0
+offset_bottom = 559.0
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="CreditsButton" to="." method="_on_credits_button_pressed"]

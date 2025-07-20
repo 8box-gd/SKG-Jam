@@ -10,17 +10,21 @@ config_version=5
 
 [application]
 
-config/name="SKG Jam"
-run/main_scene="uid://c5p8ihbithyln"
+config/name="New York Minute"
+run/main_scene="uid://dicrilqs5lcfq"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 run/max_fps=60
 boot_splash/bg_color=Color(0, 0, 0, 1)
-config/icon="res://icon.svg"
+config/icon="uid://cf22xfd4b2j64"
 
 [autoload]
 
 Carryovers="*res://carryovers.gd"
 FadeTransition="*res://fade_transition.tscn"
+
+[display]
+
+window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
@@ -134,3 +138,4 @@ zero={
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 limits/opengl/max_lights_per_object=32
+occlusion_culling/use_occlusion_culling=true

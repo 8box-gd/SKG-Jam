@@ -17,14 +17,15 @@ var display_me: Array[String] = [
 	"We are conducting an experiment relating to Net-Positive lives in human beings. ",
 	"Seeing your interest in our organization, we believe you will be a great volunteer. ",
 	"Your only instruction going in is that your time is limited, so in that time, live as Net-Positive of a life as you can. ",
-	"You will figure out the rest as you go along. ",
-	"Good luck! "
+	"You will figure out the rest as you go along.
+	Good luck! "
 ]
 
 func _ready() -> void:
-	# It doesn't play sound unless this is here. What the fuck?
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	await get_tree().process_frame
+	FadeTransition.fade_from_black(2.0)
+	# It doesn't play sound unless this is here. What the fuck?
+	await get_tree().create_timer(0.5).timeout
 	start_scene()
 
 func start_scene() -> void:
@@ -63,3 +64,9 @@ func switch_section() -> void:
 func end_scene() -> void:
 	await FadeTransition.fade_to_black()
 	get_tree().change_scene_to_file("res://main.tscn")
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("left_click"):
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	if event.is_action_pressed("ui_cancel"):
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE

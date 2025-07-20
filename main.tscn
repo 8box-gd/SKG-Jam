@@ -1,4 +1,4 @@
-[gd_scene load_steps=516 format=4 uid="uid://c5p8ihbithyln"]
+[gd_scene load_steps=518 format=4 uid="uid://c5p8ihbithyln"]
 
 [ext_resource type="Script" uid="uid://v2le1bhw1vji" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://dr4jhgs6v78ji" path="res://player.tscn" id="2_0xm2m"]
@@ -1644,7 +1644,7 @@ sky_material = SubResource("ProceduralSkyMaterial_0xm2m")
 background_mode = 2
 sky = SubResource("Sky_h2yge")
 ambient_light_source = 2
-ambient_light_color = Color(0.6, 0.574, 0.522, 1)
+ambient_light_color = Color(0.3, 0.287, 0.261, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cegan"]
 size = Vector3(1, 3, 1)
@@ -1657,6 +1657,13 @@ texture_filter = 0
 [sub_resource type="QuadMesh" id="QuadMesh_a6jrf"]
 material = SubResource("StandardMaterial3D_lswn8")
 size = Vector2(2.5, 2.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a6jrf"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_xuqvo"]
+material = SubResource("StandardMaterial3D_a6jrf")
+size = Vector2(30, 30)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_ig7tw")
@@ -3224,7 +3231,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 1, -10.304)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 1, -0.00403327)
 
 [node name="Torch9" parent="TorchesContainer" instance=ExtResource("7_272bh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.7, 1, 3.49597)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.054, 1, 3.49597)
 
 [node name="Torch10" parent="TorchesContainer" instance=ExtResource("7_272bh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.7, 1, 10.996)
@@ -3251,10 +3258,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.7, 1, 37.996)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.499999, 1, 37.996)
 
 [node name="Torch18" parent="TorchesContainer" instance=ExtResource("7_272bh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9, 1, 35.996)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9, 1, 30.996)
 
 [node name="Torch19" parent="TorchesContainer" instance=ExtResource("7_272bh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9, 1, 25.596)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.1, 1, -32.404)
 
 [node name="Torch20" parent="TorchesContainer" instance=ExtResource("7_272bh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.099999, 1, 25.596)
@@ -3290,7 +3297,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.95, 1, -32.35)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.95, 1, -17.35)
 
 [node name="Torch31" parent="TorchesContainer" instance=ExtResource("7_272bh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.95, 1, -28.85)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.95, 1, -32.313)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_1bvp3")
@@ -3304,7 +3311,7 @@ exit_door = NodePath("../ExitDoor")
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 37, 0, -0.5)
 
 [node name="EndingTrigger" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41, 0, 2)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EndingTrigger"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)
@@ -3336,8 +3343,13 @@ volume_db = -8.0
 [node name="DecorativeObjects" type="Node3D" parent="."]
 
 [node name="Carpet" type="MeshInstance3D" parent="DecorativeObjects"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.01, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.005, 0)
 mesh = SubResource("QuadMesh_a6jrf")
+
+[node name="StagingCanvas" type="MeshInstance3D" parent="DecorativeObjects"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.01, 0)
+visible = false
+mesh = SubResource("QuadMesh_xuqvo")
 
 [node name="Candle" parent="DecorativeObjects" instance=ExtResource("27_a6jrf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0412404, 0, 1.4)
