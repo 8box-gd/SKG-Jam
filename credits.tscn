@@ -33,6 +33,7 @@ color = Color(0, 0, 0, 1)
 metadata/_edit_lock_ = true
 
 [node name="TitleLabel" type="Label" parent="."]
+layout_mode = 0
 offset_top = 3.0
 offset_right = 276.0
 offset_bottom = 107.0
@@ -65,9 +66,9 @@ label_settings = SubResource("LabelSettings_4av4j")
 [node name="Label2" type="Label" parent="."]
 layout_mode = 0
 offset_left = 522.0
-offset_top = 24.0
+offset_top = 25.0
 offset_right = 1136.0
-offset_bottom = 511.0
+offset_bottom = 582.0
 text = "VISUALS
 Textures - CAN OF TEXTURES @ Superhive
 3D Smoke Effect - Le Lu
@@ -88,5 +89,5 @@ label_settings = SubResource("LabelSettings_4av4j")
 
 [node name="8boXtagBig" type="Sprite2D" parent="."]
 modulate = Color(99, 99, 99, 1)
-position = Vector2(114, 198)
+position = Vector2(149, 204)
 texture = ExtResource("4_j6beo")

@@ -33,6 +33,8 @@ func start_ending() -> void:
 	print("Starting ending")
 	reached_ending = true
 	player.life_timer.paused = true
+	player.ten_second_warning.paused = true
+	player.heartbeat_sound.stop()
 	exit_door.slam_shut()
 	crackhead.queue_free()
 	await get_tree().create_timer(1.0).timeout

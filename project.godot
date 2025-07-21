@@ -17,10 +17,18 @@ run/max_fps=60
 boot_splash/bg_color=Color(0, 0, 0, 1)
 config/icon="uid://cf22xfd4b2j64"
 
+[audio]
+
+driver/output_latency.web=70
+
 [autoload]
 
 Carryovers="*res://carryovers.gd"
 FadeTransition="*res://fade_transition.tscn"
+
+[debug]
+
+settings/stdout/verbose_stdout=true
 
 [display]
 
@@ -132,6 +140,11 @@ zero={
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194438,"key_label":0,"unicode":48,"location":0,"echo":false,"script":null)
 ]
 }
+
+[navigation]
+
+avoidance/thread_model/avoidance_use_multiple_threads=false
+baking/thread_model/baking_use_multiple_threads=false
 
 [rendering]
 
