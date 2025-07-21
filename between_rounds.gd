@@ -42,14 +42,17 @@ var tip_texts: Array[String] = [
 	"TIP: If you can hear it whispering, it can hear your footsteps. ",
 	"TIP: When sneaking, it can’t hear you. Don’t get too close though. ",
 	"TIP: Pay attention to the lights. They show you where you’ve already been. ",
+	"TIP: The digits alone aren't enough to escape. Where could you use them? ",
 ]
 
 func _ready() -> void:
+	#print(display_me.size())
 	FadeTransition.fade_from_black(2.0)
 	run_index = Carryovers.run_counter - 1
-	if run_index >= 10: run_index = 10
+	if run_index > 8: run_index = 8
+	#prints(Carryovers.run_counter - 1, run_index)
 	
-	if run_index <= 4:
+	if run_index <= (tip_texts.size() - 1):
 		tip_label.text = tip_texts[run_index]
 	else: 
 		tip_label.text = " "
