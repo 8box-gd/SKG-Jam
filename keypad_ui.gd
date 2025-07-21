@@ -15,7 +15,7 @@ var remembered_numbers := ""
 var active := false
 var solved := false
 
-var bbcode_prefix := "[font_size=35][color=MEDIUM_ORCHID][shake rate=20.0 level=5 connected=1]"
+var bbcode_prefix := "[font_size=40][color=MEDIUM_ORCHID][shake rate=20.0 level=5 connected=1]"
 
 func _ready() -> void:
 	visible = false

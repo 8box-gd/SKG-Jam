@@ -24,7 +24,7 @@ var display_me: Array[String] = [
 	
 	A recent discovery in the less-than-public sciences has piqued our interest. ",
 	"I would like to interview you or a representative of the New York Ethicist Collective about you and your organization’s day-to-day activities. Along with more general ethics-related questions, I would also like to discuss your organization’s central pillar of “Net-Positivity.” ",
-	"In layman’s terms, it appears to be a way to not necessarily circumvent death, but to see another version of yourself die, then gain the knowledge and experience of said death without dying. It can then be done again for the next death, thus compounding.",
+	"In layman’s terms, it appears to be a way to not necessarily circumvent death, but to see another version of yourself die, then gain the knowledge and experience of said death without dying. It can then be done again for the next death, thus compounding. ",
 	"Making every living being experience a net-positive life, while a noble goal, seems like quite the lofty task, so we want to shed some light on how you plan to do this. You don’t have to answer the question right now, but we would appreciate it if you came prepared to talk on this topic. ",
 	"Because acquiring this info does not appear to have a net-negative cost for the version of the self currently alive (which we can say with certainty is real, unlike the aforementioned alternate version), and because it may result in preventing future deaths, I believe this method will greatly improve the net-positivity of the lives of humanity. ",
 	"If you are interested, please reach out to me with any questions or concerns, as well as dates and times you are available to meet in person for an interview.
