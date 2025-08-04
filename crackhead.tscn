@@ -102,7 +102,6 @@ shape = SubResource("CapsuleShape3D_w651x")
 
 [node name="ThruTheWalls" type="Sprite3D" parent="."]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 1.46137, 0)
-visible = false
 billboard = 1
 no_depth_test = true
 texture_filter = 0
